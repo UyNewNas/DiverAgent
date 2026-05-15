@@ -63,13 +63,13 @@ class NoveltyLoss(nn.Module):
 
 
 def divergent_loss(outputs_k, target, embeddings_k, novelty_loss_fn,
-                   lambda_diversity=1.0, lambda_plausibility=0.8,
+                   lambda_diversity=0.15, lambda_plausibility=0.8,
                    lambda_novelty=0.5):
     l_div = diversity_loss(outputs_k)
     l_pla = plausibility_loss(outputs_k, target)
     l_nov = novelty_loss_fn(embeddings_k)
 
-    total = -lambda_diversity * l_div + lambda_plausibility * l_pla + lambda_novelty * l_nov
+    total = lambda_diversity * (l_div - 0.7) ** 2 + lambda_plausibility * l_pla + lambda_novelty * l_nov
 
     return total, {
         'diversity': l_div.item(),

@@ -12,7 +12,7 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BATCH_SIZE = 128
 LATENT_DIM = 32
 K_OUTPUTS = 4
-PROBE_EPOCHS = 10
+PROBE_EPOCHS = 20
 PROBE_LR = 1e-3
 SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
@@ -40,6 +40,7 @@ def build_memory_bank(model, loader, max_samples=5000):
                 break
     all_z = torch.cat(embeddings)[:max_samples]
     model.novelty_loss.update_memory(all_z.to(DEVICE))
+    model.novelty_loss.is_full = True
     print(f'Memory bank filled with {min(len(all_z), max_samples)} samples.')
 
 
@@ -89,7 +90,12 @@ def main():
             for k in epoch_losses:
                 epoch_losses[k] += loss_dict[k]
             n_batches += 1
-            pbar.set_postfix({'loss': f'{loss_dict["total"]:.4f}'})
+            pbar.set_postfix({
+                'total': f'{loss_dict["total"]:.4f}',
+                'div': f'{loss_dict["diversity"]:.4f}',
+                'pla': f'{loss_dict["plausibility"]:.4f}',
+                'nov': f'{loss_dict["novelty"]:.4f}',
+            })
 
         scheduler.step()
         for k in epoch_losses:

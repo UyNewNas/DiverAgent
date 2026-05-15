@@ -40,7 +40,7 @@ class CBDP(nn.Module):
     def compute_divergent_loss(self, outputs_k, target, z_perturbed):
         return divergent_loss(
             outputs_k, target, z_perturbed, self.novelty_loss,
-            lambda_diversity=1.0, lambda_plausibility=0.8, lambda_novelty=0.5,
+            lambda_diversity=0.15, lambda_plausibility=0.8, lambda_novelty=0.5,
         )
 
     def update_memory(self, embeddings):
