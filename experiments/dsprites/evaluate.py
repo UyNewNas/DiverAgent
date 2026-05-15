@@ -133,6 +133,8 @@ def composition_accuracy(model, loader):
                     correct_color += 1
                 total += 1
 
+    if total == 0:
+        return 0.0, 0.0
     return correct_shape / total, correct_color / total
 
 
@@ -174,11 +176,11 @@ def random_baseline(model, eval_loader, image_memory):
     results = {}
     for scale in [0.05, 0.1, 0.3, 0.5]:
         print(f'\n--- Random baseline: scale={scale} ---')
-        def fake_probe(obj_emb, attr_emb):
+        def fake_probe_forward(self, obj_emb, attr_emb):
             B, D = obj_emb.shape
             transport = torch.randn(B, K_OUTPUTS, D, device=DEVICE) * scale
             z_k = obj_emb.unsqueeze(1) + transport + attr_emb.unsqueeze(1)
-            BF, KD = z_k.reshape(B * K_OUTPUTS, D), D
+            BF, KD = z_k.reshape(B * K_OUTPUTS, D).shape
             injections = [
                 torch.zeros(B * K_OUTPUTS, 256, 1, 1, device=DEVICE),
                 torch.zeros(B * K_OUTPUTS, 128, 1, 1, device=DEVICE),
@@ -187,10 +189,10 @@ def random_baseline(model, eval_loader, image_memory):
             ]
             return z_k, transport, injections
 
-        orig = model.forward_divergent
-        model.forward_divergent = fake_probe
+        orig = model.probe.forward
+        model.probe.forward = fake_probe_forward.__get__(model.probe, type(model.probe))
         metrics = evaluate(model, eval_loader, image_memory)
-        model.forward_divergent = orig
+        model.probe.forward = orig
         results[f'random_{scale}'] = metrics
         print(f'  DCI={metrics["dci"]:.4f} cos_sim={metrics["cos_sim"]:.4f}')
     return results

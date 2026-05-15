@@ -93,6 +93,6 @@ def get_dataloaders(batch_size=BATCH_SIZE):
     test_eval_ds = ProbeEvalDataset('test', transform)
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, drop_last=True)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, drop_last=True)
-    train_eval_loader = DataLoader(train_eval_ds, batch_size=batch_size, shuffle=False, drop_last=True)
-    test_eval_loader = DataLoader(test_eval_ds, batch_size=batch_size, shuffle=False, drop_last=True)
+    train_eval_loader = DataLoader(train_eval_ds, batch_size=4, shuffle=False, drop_last=False)
+    test_eval_loader = DataLoader(test_eval_ds, batch_size=2, shuffle=False, drop_last=False)
     return train_loader, test_loader, train_eval_loader, test_eval_loader, train_ds, test_ds
