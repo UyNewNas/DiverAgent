@@ -2,7 +2,9 @@
   "held_out_digit": 4,
   "backbone_mse": 0.10456156358122826,
   "probe_best_mse": 0.10456156730651855,
-  "diversity": 0.0,
+  "diversity_cosine_sim": 1.5280525511585097e-08,
+  "diversity_target_tau": 0.3,
+  "diversity_quality": 0.7000000152805255,
   "plausibility": 0.8954384326934814,
   "novelty": 0.0,
   "dci": 0.0
