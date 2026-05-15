@@ -51,24 +51,38 @@ class ConditionalDecoder(nn.Module):
     def __init__(self, latent_dim=LATENT_DIM):
         super().__init__()
         self.fc = nn.Linear(latent_dim, 512 * 4 * 4)
-        self.deconv = nn.Sequential(
-            nn.ConvTranspose2d(512, 256, 4, 2, 1),
-            nn.BatchNorm2d(256),
-            nn.ReLU(True),
-            nn.ConvTranspose2d(256, 128, 4, 2, 1),
-            nn.BatchNorm2d(128),
-            nn.ReLU(True),
-            nn.ConvTranspose2d(128, 64, 4, 2, 1),
-            nn.BatchNorm2d(64),
-            nn.ReLU(True),
-            nn.ConvTranspose2d(64, 1, 4, 2, 1),
-            nn.Sigmoid(),
-        )
 
-    def forward(self, class_emb):
+        self.deconv0 = nn.ConvTranspose2d(512, 256, 4, 2, 1)
+        self.bn0 = nn.BatchNorm2d(256)
+        self.deconv1 = nn.ConvTranspose2d(256, 128, 4, 2, 1)
+        self.bn1 = nn.BatchNorm2d(128)
+        self.deconv2 = nn.ConvTranspose2d(128, 64, 4, 2, 1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.deconv3 = nn.ConvTranspose2d(64, 1, 4, 2, 1)
+
+    def forward(self, class_emb, injections=None):
         h = self.fc(class_emb)
         h = h.view(h.size(0), 512, 4, 4)
-        return self.deconv(h)
+
+        if injections is not None:
+            h = h + injections[0]
+        h = self.deconv0(h)
+        if injections is not None:
+            h = h + injections[1]
+        h = F.relu(self.bn0(h), inplace=True)
+
+        h = self.deconv1(h)
+        if injections is not None:
+            h = h + injections[2]
+        h = F.relu(self.bn1(h), inplace=True)
+
+        h = self.deconv2(h)
+        if injections is not None:
+            h = h + injections[3]
+        h = F.relu(self.bn2(h), inplace=True)
+
+        h = self.deconv3(h)
+        return torch.sigmoid(h)
 
 
 class OmniglotBackbone(nn.Module):
@@ -87,8 +101,8 @@ class OmniglotBackbone(nn.Module):
         class_emb = self.aggregator(features)
         return class_emb
 
-    def decode(self, class_emb):
-        return self.decoder(class_emb)
+    def decode(self, class_emb, injections=None):
+        return self.decoder(class_emb, injections)
 
     def forward(self, support_images, target_images):
         class_emb = self.encode_set(support_images)
@@ -110,6 +124,10 @@ class DivergentProbe(nn.Module):
             nn.Linear(hidden_dim, latent_dim * k_outputs),
         )
         self.noise_scale = nn.Parameter(torch.tensor(0.1))
+        self.inj_mlp_0 = nn.Linear(latent_dim, 512)
+        self.inj_mlp_1 = nn.Linear(latent_dim, 256)
+        self.inj_mlp_2 = nn.Linear(latent_dim, 128)
+        self.inj_mlp_3 = nn.Linear(latent_dim, 64)
 
     def forward(self, class_emb):
         perturbations = self.mlp(class_emb)
@@ -117,7 +135,15 @@ class DivergentProbe(nn.Module):
         eps = self.noise_scale * perturbations
         z_perturbed = class_emb.unsqueeze(1) + eps
 
-        return z_perturbed, eps
+        B, K, D = z_perturbed.shape
+        z_flat = z_perturbed.reshape(B * K, D)
+        injections = [
+            self.inj_mlp_0(z_flat).view(B * K, 512, 1, 1),
+            self.inj_mlp_1(z_flat).view(B * K, 256, 1, 1),
+            self.inj_mlp_2(z_flat).view(B * K, 128, 1, 1),
+            self.inj_mlp_3(z_flat).view(B * K, 64, 1, 1),
+        ]
+        return z_perturbed, injections, eps
 
     def count_parameters(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
@@ -212,10 +238,10 @@ class OmniglotCBDP(nn.Module):
         return self.backbone(support_images, target_images)
 
     def forward_divergent(self, class_emb):
-        z_perturbed, eps = self.probe(class_emb)
+        z_perturbed, injections, eps = self.probe(class_emb)
         B, K, _ = z_perturbed.shape
         z_flat = z_perturbed.reshape(B * K, -1)
-        outputs_flat = self.backbone.decode(z_flat)
+        outputs_flat = self.backbone.decode(z_flat, injections)
         _, C, H, W = outputs_flat.shape
         outputs_k = outputs_flat.view(B, K, C, H, W)
         return outputs_k, z_perturbed, eps
