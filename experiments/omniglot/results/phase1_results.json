@@ -1,24 +1,26 @@
 {
   "base": {
     "tag": "base_classes",
-    "backbone_cos_sim": 1.000000003973643,
-    "backbone_pla": 0.9688295106093089,
-    "backbone_dci": 0.5391183466007696,
-    "probe_cos_sim": 0.6439496060212453,
-    "probe_pla": 0.7888558467229208,
-    "probe_novelty": 0.1872804900010427,
-    "probe_dci": 0.45934022365107996,
-    "dci_improvement": -14.797886855957312
+    "backbone_cos_sim": 1.0000000774860383,
+    "backbone_pla": 0.8821926752726237,
+    "backbone_novelty": 0.008313506841659546,
+    "backbone_dci": 0.13005897137322261,
+    "probe_cos_sim": 0.6437870383262634,
+    "probe_pla": 0.9496176997820537,
+    "probe_novelty": 0.19025854667027792,
+    "probe_dci": 0.4912556941312976,
+    "dci_improvement": 277.717652957265
   },
   "novel": {
     "tag": "novel_classes",
-    "backbone_cos_sim": 1.00000002682209,
-    "backbone_pla": 0.9661632925271988,
-    "backbone_dci": 0.538374179270671,
-    "probe_cos_sim": 0.639290651679039,
-    "probe_pla": 0.7835539966821671,
-    "probe_novelty": 0.1900191217660904,
-    "probe_dci": 0.4616058941991712,
-    "dci_improvement": -14.259280631826895
+    "backbone_cos_sim": 1.000000062584877,
+    "backbone_pla": 0.8796509295701981,
+    "backbone_novelty": 0.008676090836524963,
+    "backbone_dci": 0.13173501886942068,
+    "probe_cos_sim": 0.6391709119081497,
+    "probe_pla": 0.9461402177810669,
+    "probe_novelty": 0.19300588369369506,
+    "probe_dci": 0.49414345965463974,
+    "dci_improvement": 275.1041020796817
   }
 }
