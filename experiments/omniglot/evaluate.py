@@ -38,17 +38,12 @@ def cosine_diversity(outputs_k):
     return pairwise.mean().item()
 
 
-def plausibility_score(outputs_k, support_images):
-    B, K, C, H, W = outputs_k.shape
-    _, S, _, _, _ = support_images.shape
-    flat_out = outputs_k.view(B, K, -1)
-    flat_sup = support_images.view(B, S, -1)
-    flat_out_n = F.normalize(flat_out, dim=-1)
-    flat_sup_n = F.normalize(flat_sup, dim=-1)
-    sim = torch.bmm(flat_out_n, flat_sup_n.transpose(1, 2))
-    best_sim, _ = sim.max(dim=2)
-    avg_best_sim = best_sim.mean().item()
-    return max(0.0, min(1.0, avg_best_sim))
+def plausibility_score(outputs_k, target):
+    target_expanded = target.unsqueeze(1).expand_as(outputs_k)
+    mse = F.mse_loss(outputs_k, target_expanded, reduction='none').view(
+        outputs_k.size(0), outputs_k.size(1), -1
+    ).mean(dim=-1)
+    return (1.0 - mse.min(dim=1)[0]).mean().item()
 
 
 def compute_novelty_score(outputs_k, memory):
@@ -68,10 +63,7 @@ def build_image_memory(loader, model, max_samples=2000):
     memory_list = []
     with torch.no_grad():
         for support, target, _ in loader:
-            support = support.to(DEVICE)
-            class_emb = model.backbone.encode_set(support)
-            recon = model.backbone.decode(class_emb)
-            memory_list.append(recon.cpu())
+            memory_list.append(target.cpu())
             if len(torch.cat(memory_list)) >= max_samples:
                 break
     return torch.cat(memory_list)[:max_samples]
@@ -83,6 +75,7 @@ def evaluate(model, loader, image_memory, tag, tau=0.3):
         'tag': tag,
         'backbone_cos_sim': [],
         'backbone_pla': [],
+        'backbone_novelty': [],
         'backbone_dci': [],
         'probe_cos_sim': [],
         'probe_pla': [],
@@ -99,17 +92,19 @@ def evaluate(model, loader, image_memory, tag, tau=0.3):
 
             bb_outputs = backbone_baseline(model, class_emb, k=K_OUTPUTS)
             bb_cos = cosine_diversity(bb_outputs)
-            bb_pla = plausibility_score(bb_outputs, support)
+            bb_pla = plausibility_score(bb_outputs, target)
+            bb_nov = compute_novelty_score(bb_outputs, image_memory)
 
             outputs_k, _, _ = model.forward_divergent(class_emb)
             pr_cos = cosine_diversity(outputs_k)
-            pr_pla = plausibility_score(outputs_k, support)
+            pr_pla = plausibility_score(outputs_k, target)
             pr_nov = compute_novelty_score(outputs_k, image_memory)
 
         div_qual_bb = max(0.0, min(1.0, 1.0 - abs(bb_cos - tau)))
-        dci_bb = (bb_pla * div_qual_bb) ** 0.5
+        dci_bb = (bb_pla * div_qual_bb * bb_nov) ** (1 / 3)
         results['backbone_cos_sim'].append(bb_cos)
         results['backbone_pla'].append(bb_pla)
+        results['backbone_novelty'].append(bb_nov)
         results['backbone_dci'].append(dci_bb)
 
         div_qual_pr = max(0.0, min(1.0, 1.0 - abs(pr_cos - tau)))
@@ -156,7 +151,9 @@ def main():
 
     print('\n--- Base Classes (seen during training) ---')
     print(f'Backbone: cos_sim={base_results["backbone_cos_sim"]:.4f}, '
-          f'pla={base_results["backbone_pla"]:.4f}, DCI={base_results["backbone_dci"]:.4f}')
+          f'pla={base_results["backbone_pla"]:.4f}, '
+          f'novelty={base_results["backbone_novelty"]:.4f}, '
+          f'DCI={base_results["backbone_dci"]:.4f}')
     print(f'CBDP:     cos_sim={base_results["probe_cos_sim"]:.4f}, '
           f'pla={base_results["probe_pla"]:.4f}, '
           f'novelty={base_results["probe_novelty"]:.4f}, '
@@ -165,7 +162,9 @@ def main():
 
     print('\n--- Novel Classes (held-out, few-shot) ---')
     print(f'Backbone: cos_sim={novel_results["backbone_cos_sim"]:.4f}, '
-          f'pla={novel_results["backbone_pla"]:.4f}, DCI={novel_results["backbone_dci"]:.4f}')
+          f'pla={novel_results["backbone_pla"]:.4f}, '
+          f'novelty={novel_results["backbone_novelty"]:.4f}, '
+          f'DCI={novel_results["backbone_dci"]:.4f}')
     print(f'CBDP:     cos_sim={novel_results["probe_cos_sim"]:.4f}, '
           f'pla={novel_results["probe_pla"]:.4f}, '
           f'novelty={novel_results["probe_novelty"]:.4f}, '
