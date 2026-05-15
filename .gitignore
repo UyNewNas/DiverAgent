@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# IDE
+.venv/
+.vscode/
+
+# Model checkpoints (large files)
+experiments/*/checkpoints/*.pt
+
+# Raw datasets
+experiments/*/data/*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Internal working documents
+docs/
+.trae/
