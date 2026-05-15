@@ -48,9 +48,9 @@ class SetAggregator(nn.Module):
 
 
 class ConditionalDecoder(nn.Module):
-    def __init__(self, latent_dim=LATENT_DIM, noise_dim=NOISE_DIM):
+    def __init__(self, latent_dim=LATENT_DIM):
         super().__init__()
-        self.fc = nn.Linear(latent_dim + noise_dim, 512 * 4 * 4)
+        self.fc = nn.Linear(latent_dim, 512 * 4 * 4)
         self.deconv = nn.Sequential(
             nn.ConvTranspose2d(512, 256, 4, 2, 1),
             nn.BatchNorm2d(256),
@@ -65,9 +65,8 @@ class ConditionalDecoder(nn.Module):
             nn.Sigmoid(),
         )
 
-    def forward(self, class_emb, noise):
-        z = torch.cat([class_emb, noise], dim=-1)
-        h = self.fc(z)
+    def forward(self, class_emb):
+        h = self.fc(class_emb)
         h = h.view(h.size(0), 512, 4, 4)
         return self.deconv(h)
 
@@ -77,7 +76,7 @@ class OmniglotBackbone(nn.Module):
         super().__init__()
         self.encoder = ImageEncoder(feature_dim)
         self.aggregator = SetAggregator(feature_dim, latent_dim)
-        self.decoder = ConditionalDecoder(latent_dim, noise_dim)
+        self.decoder = ConditionalDecoder(latent_dim)
         self.noise_dim = noise_dim
 
     def encode_set(self, support_images):
@@ -88,13 +87,12 @@ class OmniglotBackbone(nn.Module):
         class_emb = self.aggregator(features)
         return class_emb
 
-    def decode(self, class_emb, noise):
-        return self.decoder(class_emb, noise)
+    def decode(self, class_emb):
+        return self.decoder(class_emb)
 
     def forward(self, support_images, target_images):
         class_emb = self.encode_set(support_images)
-        noise = torch.randn(class_emb.size(0), self.noise_dim, device=class_emb.device)
-        generated = self.decode(class_emb, noise)
+        generated = self.decode(class_emb)
         return generated, class_emb
 
     def count_parameters(self):
@@ -217,8 +215,7 @@ class OmniglotCBDP(nn.Module):
         z_perturbed, eps = self.probe(class_emb)
         B, K, _ = z_perturbed.shape
         z_flat = z_perturbed.reshape(B * K, -1)
-        noise = torch.randn(B * K, self.noise_dim, device=z_flat.device)
-        outputs_flat = self.backbone.decode(z_flat, noise)
+        outputs_flat = self.backbone.decode(z_flat)
         _, C, H, W = outputs_flat.shape
         outputs_k = outputs_flat.view(B, K, C, H, W)
         return outputs_k, z_perturbed, eps

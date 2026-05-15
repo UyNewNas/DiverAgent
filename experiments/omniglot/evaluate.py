@@ -20,11 +20,10 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 
 
 def backbone_baseline(model, class_emb, k=K_OUTPUTS):
-    class_emb_expanded = class_emb.unsqueeze(1).expand(-1, k, -1)
-    B, K, D = class_emb_expanded.shape
-    flat_emb = class_emb_expanded.reshape(B * K, D)
-    noise = torch.randn(B * K, model.backbone.noise_dim, device=DEVICE)
-    flat_out = model.backbone.decode(flat_emb, noise)
+    class_emb_repeated = class_emb.unsqueeze(1).expand(-1, k, -1)
+    B, K, D = class_emb_repeated.shape
+    flat_emb = class_emb_repeated.reshape(B * K, D)
+    flat_out = model.backbone.decode(flat_emb)
     _, C, H, W = flat_out.shape
     return flat_out.view(B, K, C, H, W)
 
@@ -71,8 +70,7 @@ def build_image_memory(loader, model, max_samples=2000):
         for support, target, _ in loader:
             support = support.to(DEVICE)
             class_emb = model.backbone.encode_set(support)
-            noise = torch.randn(class_emb.size(0), model.backbone.noise_dim, device=DEVICE)
-            recon = model.backbone.decode(class_emb, noise)
+            recon = model.backbone.decode(class_emb)
             memory_list.append(recon.cpu())
             if len(torch.cat(memory_list)) >= max_samples:
                 break
