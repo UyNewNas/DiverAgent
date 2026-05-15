@@ -1,0 +1,20 @@
+Loaded CBDP model.
+Building image feature memory for novelty...
+
+============================================================
+Phase 1: Omniglot Few-Shot Generation Evaluation
+============================================================
+Evaluate base_classes:   0%|          | 0/30 [00:00<?, ?it/s]Evaluate base_classes:   3%|¨†         | 1/30 [00:00<00:04,  6.81it/s]Evaluate base_classes:   7%|¨ƒ         | 2/30 [00:00<00:03,  8.15it/s]Evaluate base_classes:  10%|¨€         | 3/30 [00:00<00:03,  8.58it/s]Evaluate base_classes:  17%|¨€¨ƒ        | 5/30 [00:00<00:02,  9.47it/s]Evaluate base_classes:  20%|¨€¨€        | 6/30 [00:00<00:02,  9.58it/s]Evaluate base_classes:  27%|¨€¨€¨ƒ       | 8/30 [00:00<00:02,  9.86it/s]Evaluate base_classes:  30%|¨€¨€¨€       | 9/30 [00:00<00:02,  9.71it/s]Evaluate base_classes:  37%|¨€¨€¨€¨ƒ      | 11/30 [00:01<00:01,  9.84it/s]Evaluate base_classes:  43%|¨€¨€¨€¨€¨†     | 13/30 [00:01<00:01,  9.87it/s]Evaluate base_classes:  50%|¨€¨€¨€¨€¨€     | 15/30 [00:01<00:01,  9.98it/s]Evaluate base_classes:  57%|¨€¨€¨€¨€¨€¨ƒ    | 17/30 [00:01<00:01,  9.98it/s]Evaluate base_classes:  60%|¨€¨€¨€¨€¨€¨€    | 18/30 [00:01<00:01,  9.43it/s]Evaluate base_classes:  63%|¨€¨€¨€¨€¨€¨€¨†   | 19/30 [00:01<00:01,  9.36it/s]Evaluate base_classes:  67%|¨€¨€¨€¨€¨€¨€¨ƒ   | 20/30 [00:02<00:01,  9.34it/s]Evaluate base_classes:  73%|¨€¨€¨€¨€¨€¨€¨€¨†  | 22/30 [00:02<00:00,  9.56it/s]Evaluate base_classes:  77%|¨€¨€¨€¨€¨€¨€¨€¨ƒ  | 23/30 [00:02<00:00,  9.40it/s]Evaluate base_classes:  80%|¨€¨€¨€¨€¨€¨€¨€¨€  | 24/30 [00:02<00:00,  9.47it/s]Evaluate base_classes:  83%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 25/30 [00:02<00:00,  9.49it/s]Evaluate base_classes:  87%|¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ | 26/30 [00:02<00:00,  9.57it/s]Evaluate base_classes:  93%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 28/30 [00:02<00:00,  9.72it/s]Evaluate base_classes:  97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 29/30 [00:03<00:00,  9.73it/s]Evaluate base_classes: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 30/30 [00:03<00:00,  9.44it/s]Evaluate base_classes: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 30/30 [00:03<00:00,  9.52it/s]
+Evaluate novel_classes:   0%|          | 0/20 [00:00<?, ?it/s]Evaluate novel_classes:   5%|¨„         | 1/20 [00:00<00:01,  9.98it/s]Evaluate novel_classes:  10%|¨€         | 2/20 [00:00<00:01,  9.38it/s]Evaluate novel_classes:  20%|¨€¨€        | 4/20 [00:00<00:01,  8.04it/s]Evaluate novel_classes:  30%|¨€¨€¨€       | 6/20 [00:00<00:01,  8.95it/s]Evaluate novel_classes:  40%|¨€¨€¨€¨€      | 8/20 [00:00<00:01,  9.40it/s]Evaluate novel_classes:  50%|¨€¨€¨€¨€¨€     | 10/20 [00:01<00:01,  9.65it/s]Evaluate novel_classes:  60%|¨€¨€¨€¨€¨€¨€    | 12/20 [00:01<00:00,  9.91it/s]Evaluate novel_classes:  70%|¨€¨€¨€¨€¨€¨€¨€   | 14/20 [00:01<00:00, 10.00it/s]Evaluate novel_classes:  80%|¨€¨€¨€¨€¨€¨€¨€¨€  | 16/20 [00:01<00:00,  9.90it/s]Evaluate novel_classes:  85%|¨€¨€¨€¨€¨€¨€¨€¨€¨„ | 17/20 [00:01<00:00,  9.79it/s]Evaluate novel_classes:  95%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 19/20 [00:01<00:00,  9.95it/s]Evaluate novel_classes: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 20/20 [00:02<00:00,  9.79it/s]Evaluate novel_classes: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 20/20 [00:02<00:00,  9.63it/s]
+
+--- Base Classes (seen during training) ---
+Backbone: cos_sim=1.0000, pla=0.9780, DCI=0.5417
+CBDP:     cos_sim=0.9913, pla=0.9731, novelty=0.0016, DCI=0.0775
+DCI improvement: -85.7%
+
+--- Novel Classes (held-out, few-shot) ---
+Backbone: cos_sim=1.0000, pla=0.9758, DCI=0.5411
+CBDP:     cos_sim=0.9897, pla=0.9700, novelty=0.0019, DCI=0.0830
+DCI improvement: -84.7%
+
+Results saved to G:\githubwk\DiverAgent\experiments/omniglot\results\phase1_results.json
