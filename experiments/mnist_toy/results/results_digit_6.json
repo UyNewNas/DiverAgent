@@ -1,0 +1,11 @@
+{
+  "held_out_digit": 6,
+  "backbone_mse": 0.0034272311604581773,
+  "probe_best_mse": 0.0034532170393504202,
+  "diversity_cosine_sim": 0.2863072454929352,
+  "diversity_target_tau": 0.3,
+  "diversity_quality": 0.9863072454929351,
+  "plausibility": 0.9965467829606496,
+  "novelty": 0.9296875,
+  "dci": 0.970395935707892
+}
