@@ -1,0 +1,24 @@
+{
+  "base": {
+    "tag": "base_classes",
+    "backbone_cos_sim": 0.9999999940395355,
+    "backbone_pla": 0.9780364274978638,
+    "backbone_dci": 0.5416740721424798,
+    "probe_cos_sim": 0.9912135561307271,
+    "probe_pla": 0.9725571393966674,
+    "probe_novelty": 0.0016782204310099283,
+    "probe_dci": 0.07953983194451024,
+    "dci_improvement": -85.31592408883319
+  },
+  "novel": {
+    "tag": "novel_classes",
+    "backbone_cos_sim": 1.0,
+    "backbone_pla": 0.9758686125278473,
+    "backbone_dci": 0.5410717759862119,
+    "probe_cos_sim": 0.9895540952682496,
+    "probe_pla": 0.9694067120552063,
+    "probe_novelty": 0.0020302385091781616,
+    "probe_dci": 0.08436900395252069,
+    "dci_improvement": -84.40705878647223
+  }
+}
