@@ -123,7 +123,7 @@ class DivergentProbe(nn.Module):
             nn.ReLU(True),
             nn.Linear(hidden_dim, latent_dim * k_outputs),
         )
-        self.noise_scale = nn.Parameter(torch.tensor(0.1))
+        self.noise_scale = nn.Parameter(torch.tensor(0.3))
         self.inj_mlp_0 = nn.Linear(latent_dim, 512)
         self.inj_mlp_1 = nn.Linear(latent_dim, 256)
         self.inj_mlp_2 = nn.Linear(latent_dim, 128)
