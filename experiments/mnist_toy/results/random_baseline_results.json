@@ -1,47 +1,47 @@
 {
   "random_0.05": {
-    "backbone_mse": 0.003357359868344627,
-    "probe_mse": 0.003331577160713982,
-    "cosine_sim": 0.999904916256289,
-    "diversity_quality": 0.3000950837437111,
-    "plausibility": 0.996668422839286,
-    "novelty": 0.694075,
-    "dci": 0.5921139964683548
+    "backbone_mse": 0.11430427337749095,
+    "probe_mse": 0.11430427432060242,
+    "cosine_sim": 0.7607060553906839,
+    "diversity_quality": 0.5392939446093161,
+    "plausibility": 0.8856957256793976,
+    "novelty": 0.0,
+    "dci": 0.0
   },
   "random_0.1": {
-    "backbone_mse": 0.0033573598653974033,
-    "probe_mse": 0.003322503676850207,
-    "cosine_sim": 0.9996228052090995,
-    "diversity_quality": 0.3003771947909004,
-    "plausibility": 0.9966774963231498,
-    "novelty": 0.695275,
-    "dci": 0.5926424296516658
+    "backbone_mse": 0.11430427337749095,
+    "probe_mse": 0.11430427432060242,
+    "cosine_sim": 0.7607270577285863,
+    "diversity_quality": 0.5392729422714138,
+    "plausibility": 0.8856957256793976,
+    "novelty": 0.0,
+    "dci": 0.0
   },
   "random_0.3": {
-    "backbone_mse": 0.00335735986245018,
-    "probe_mse": 0.003450088391575632,
-    "cosine_sim": 0.9966516502295868,
-    "diversity_quality": 0.30334834977041325,
-    "plausibility": 0.9965499116084243,
-    "novelty": 0.697025,
-    "dci": 0.5950630934068449
+    "backbone_mse": 0.11430427337749095,
+    "probe_mse": 0.11430427432060242,
+    "cosine_sim": 0.7605659124217455,
+    "diversity_quality": 0.5394340875782544,
+    "plausibility": 0.8856957256793976,
+    "novelty": 0.0,
+    "dci": 0.0
   },
   "random_0.5": {
-    "backbone_mse": 0.0033573598565557333,
-    "probe_mse": 0.0038108549941378305,
-    "cosine_sim": 0.990915752664397,
-    "diversity_quality": 0.309084247335603,
-    "plausibility": 0.9961891450058622,
-    "novelty": 0.702275,
-    "dci": 0.6002174651147255
+    "backbone_mse": 0.11430427337749095,
+    "probe_mse": 0.11430427432060242,
+    "cosine_sim": 0.7604743596873705,
+    "diversity_quality": 0.5395256403126294,
+    "plausibility": 0.8856957256793976,
+    "novelty": 0.0,
+    "dci": 0.0
   },
   "cbdp_trained": {
-    "backbone_mse": 0.00335735986245018,
-    "probe_mse": 0.0033918558325194107,
-    "cosine_sim": 0.3003054181986217,
-    "diversity_quality": 0.9996945818013783,
-    "plausibility": 0.9966081441674806,
-    "novelty": 0.92105,
-    "dci": 0.971758449824448
+    "backbone_mse": 0.11430427337749095,
+    "probe_mse": 0.11430427432060242,
+    "cosine_sim": 0.29884697478028793,
+    "diversity_quality": 0.9988469747802879,
+    "plausibility": 0.8856957256793976,
+    "novelty": 0.0,
+    "dci": 0.0
   }
 }
