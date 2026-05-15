@@ -1,0 +1,142 @@
+
+============================================================
+Evaluating on held-out digit: 0
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating:  25%|¨€¨€¨„       | 1/4 [00:00<00:00,  3.88it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 14.50it/s]
+
+--- Results for digit 0 ---
+Backbone MSE (convergent):       0.148135
+Probe best MSE (divergent):       0.148135
+Diversity (mean cosine_sim):      0.2840  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9840
+Plausibility (1 - min_mse):       0.8519
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 1
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 209.28it/s]
+
+--- Results for digit 1 ---
+Backbone MSE (convergent):       0.066517
+Probe best MSE (divergent):       0.066517
+Diversity (mean cosine_sim):      0.3140  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9860
+Plausibility (1 - min_mse):       0.9335
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 2
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 217.63it/s]
+
+--- Results for digit 2 ---
+Backbone MSE (convergent):       0.129596
+Probe best MSE (divergent):       0.129596
+Diversity (mean cosine_sim):      0.2921  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9921
+Plausibility (1 - min_mse):       0.8704
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 3
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 225.68it/s]
+
+--- Results for digit 3 ---
+Backbone MSE (convergent):       0.122370
+Probe best MSE (divergent):       0.122370
+Diversity (mean cosine_sim):      0.2969  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9969
+Plausibility (1 - min_mse):       0.8776
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 4
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 213.10it/s]
+
+--- Results for digit 4 ---
+Backbone MSE (convergent):       0.104562
+Probe best MSE (divergent):       0.104562
+Diversity (mean cosine_sim):      0.3053  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9947
+Plausibility (1 - min_mse):       0.8954
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 5
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 226.55it/s]
+
+--- Results for digit 5 ---
+Backbone MSE (convergent):       0.114123
+Probe best MSE (divergent):       0.114123
+Diversity (mean cosine_sim):      0.2963  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9963
+Plausibility (1 - min_mse):       0.8859
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 6
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 184.18it/s]
+
+--- Results for digit 6 ---
+Backbone MSE (convergent):       0.125660
+Probe best MSE (divergent):       0.125660
+Diversity (mean cosine_sim):      0.2938  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9938
+Plausibility (1 - min_mse):       0.8743
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 7
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 197.64it/s]
+
+--- Results for digit 7 ---
+Backbone MSE (convergent):       0.101010
+Probe best MSE (divergent):       0.101010
+Diversity (mean cosine_sim):      0.3083  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9917
+Plausibility (1 - min_mse):       0.8990
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 8
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 200.34it/s]
+
+--- Results for digit 8 ---
+Backbone MSE (convergent):       0.129732
+Probe best MSE (divergent):       0.129732
+Diversity (mean cosine_sim):      0.2938  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9938
+Plausibility (1 - min_mse):       0.8703
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+============================================================
+Evaluating on held-out digit: 9
+============================================================
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]Evaluating: 100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 4/4 [00:00<00:00, 176.72it/s]
+
+--- Results for digit 9 ---
+Backbone MSE (convergent):       0.106839
+Probe best MSE (divergent):       0.106839
+Diversity (mean cosine_sim):      0.3055  (target tau=0.3)
+Diversity quality (1-|cos-0.3|): 0.9945
+Plausibility (1 - min_mse):       0.8932
+Novelty score:                    0.0000
+DCI (geometric mean):             0.0000
+
+All results saved to G:\githubwk\DiverAgent\experiments/mnist_toy\results
