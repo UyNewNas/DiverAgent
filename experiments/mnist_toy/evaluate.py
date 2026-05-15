@@ -11,7 +11,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 from diver_agent.cbdp import CBDP
-from diver_agent.losses import diversity_loss, plausibility_loss
+from diver_agent.losses import plausibility_loss
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BATCH_SIZE = 64
@@ -103,8 +103,13 @@ def evaluate():
                 ).view(x.size(0), K_OUTPUTS, -1).mean(dim=-1).min(dim=1)[0].mean()
                 probe_mse += min_mse.item()
 
-                div_score = 1.0 - diversity_loss(outputs_k).item()
-                all_div_scores.append(div_score)
+                batch, K, _, _, _ = outputs_k.shape
+                flat = outputs_k.view(batch, K, -1)
+                flat_norm = F.normalize(flat, dim=-1)
+                sim_matrix = torch.bmm(flat_norm, flat_norm.transpose(1, 2))
+                mask = 1 - torch.eye(K, device=outputs_k.device).unsqueeze(0)
+                pairwise_sim = (sim_matrix * mask).sum(dim=(1, 2)) / (K * (K - 1))
+                all_div_scores.append(pairwise_sim.mean().item())
 
                 pla_score = 1.0 - plausibility_loss(outputs_k, x).item()
                 all_plausibility_scores.append(pla_score)
@@ -118,21 +123,26 @@ def evaluate():
 
         novelty = compute_novelty_score(first_outputs_k, memory_loader, model)
 
-        dci_probe = (mean_pla * mean_div * novelty) ** (1 / 3)
+        tau = 0.3
+        diversity_quality = max(0.0, min(1.0, 1.0 - abs(mean_div - tau)))
+        dci_probe = (mean_pla * diversity_quality * novelty) ** (1 / 3)
 
         print(f'\n--- Results for digit {held_out_digit} ---')
         print(f'Backbone MSE (convergent):       {backbone_mse:.6f}')
         print(f'Probe best MSE (divergent):       {probe_mse:.6f}')
-        print(f'Diversity score (higher=better):  {mean_div:.4f}')
-        print(f'Plausibility score (higher=better): {mean_pla:.4f}')
-        print(f'Novelty score (higher=better):    {novelty:.4f}')
+        print(f'Diversity (mean cosine_sim):      {mean_div:.4f}  (target tau={tau})')
+        print(f'Diversity quality (1-|cos-{tau}|): {diversity_quality:.4f}')
+        print(f'Plausibility (1 - min_mse):       {mean_pla:.4f}')
+        print(f'Novelty score:                    {novelty:.4f}')
         print(f'DCI (geometric mean):             {dci_probe:.4f}')
 
         results = {
             'held_out_digit': held_out_digit,
             'backbone_mse': backbone_mse,
             'probe_best_mse': probe_mse,
-            'diversity': mean_div,
+            'diversity_cosine_sim': mean_div,
+            'diversity_target_tau': tau,
+            'diversity_quality': diversity_quality,
             'plausibility': mean_pla,
             'novelty': novelty,
             'dci': dci_probe,
