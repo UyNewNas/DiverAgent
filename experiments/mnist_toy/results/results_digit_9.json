@@ -1,11 +1,9 @@
 {
   "held_out_digit": 9,
-  "backbone_mse": 0.0027512075612321496,
-  "probe_best_mse": 0.0027952235541306436,
-  "diversity_cosine_sim": 0.3026818484067917,
-  "diversity_target_tau": 0.3,
-  "diversity_quality": 0.9973181515932084,
-  "plausibility": 0.9972047764458694,
-  "novelty": 0.85546875,
-  "dci": 0.9475615019855215
+  "backbone_mse": 0.10683947429060936,
+  "probe_best_mse": 0.10683947242796421,
+  "diversity": 2.9802322387695312e-08,
+  "plausibility": 0.8931605275720358,
+  "novelty": 0.0,
+  "dci": 0.0
 }
