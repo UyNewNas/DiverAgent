@@ -1,24 +1,24 @@
 {
   "base": {
     "tag": "base_classes",
-    "backbone_cos_sim": 1.0000000417232513,
-    "backbone_pla": 0.9671382288138072,
-    "backbone_dci": 0.5386474997587013,
-    "probe_cos_sim": 0.6241630891958873,
-    "probe_pla": 0.7780589401721955,
-    "probe_novelty": 0.1975732723871867,
-    "probe_dci": 0.4700997429001165,
-    "dci_improvement": -12.725902726605472
+    "backbone_cos_sim": 1.000000003973643,
+    "backbone_pla": 0.9688295106093089,
+    "backbone_dci": 0.5391183466007696,
+    "probe_cos_sim": 0.6439496060212453,
+    "probe_pla": 0.7888558467229208,
+    "probe_novelty": 0.1872804900010427,
+    "probe_dci": 0.45934022365107996,
+    "dci_improvement": -14.797886855957312
   },
   "novel": {
     "tag": "novel_classes",
     "backbone_cos_sim": 1.00000002682209,
-    "backbone_pla": 0.964568880200386,
-    "backbone_dci": 0.5379297684621946,
-    "probe_cos_sim": 0.6191606879234314,
-    "probe_pla": 0.7727321416139603,
-    "probe_novelty": 0.20049687325954438,
-    "probe_dci": 0.4724663533584,
-    "dci_improvement": -12.169509653823033
+    "backbone_pla": 0.9661632925271988,
+    "backbone_dci": 0.538374179270671,
+    "probe_cos_sim": 0.639290651679039,
+    "probe_pla": 0.7835539966821671,
+    "probe_novelty": 0.1900191217660904,
+    "probe_dci": 0.4616058941991712,
+    "dci_improvement": -14.259280631826895
   }
 }
