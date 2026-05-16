@@ -142,7 +142,7 @@ class DirectionalProbe(nn.Module):
             nn.ReLU(True),
             nn.Linear(hidden_dim, object_dim * k_outputs),
         )
-        self.noise_scale = nn.Parameter(torch.tensor(0.1))
+        self.noise_scale = nn.Parameter(torch.tensor(0.2))
         self.inj_mlp_0 = nn.Linear(object_dim, 256)
         self.inj_mlp_1 = nn.Linear(object_dim, 128)
         self.inj_mlp_2 = nn.Linear(object_dim, 64)
@@ -204,7 +204,7 @@ def plausibility_loss(outputs_k, target):
 
 
 class NoveltyLoss(nn.Module):
-    def __init__(self, memory_size=3000, threshold=0.95):
+    def __init__(self, memory_size=3000, threshold=0.80):
         super().__init__()
         self.memory = None
         self.memory_ptr = 0

@@ -54,7 +54,6 @@ def main():
         list(model.probe.parameters()) + list(model.gate.parameters()),
         lr=PROBE_LR,
     )
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=PROBE_EPOCHS)
 
     print(f'\nTraining directional probe (K={model.k_outputs} outputs)...')
     for epoch in range(PROBE_EPOCHS):
@@ -88,7 +87,6 @@ def main():
                 'nov': f'{loss_dict["novelty"]:.4f}',
             })
 
-        scheduler.step()
         for k in epoch_losses:
             epoch_losses[k] /= n_batches
         print(f'Epoch {epoch+1}: ' + ', '.join(f'{k}={v:.4f}' for k, v in epoch_losses.items()))
