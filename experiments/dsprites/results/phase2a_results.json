@@ -15,16 +15,16 @@
     "novelty": 0.27643855412801105,
     "dci": 0.6210584535436704,
     "backbone_cos_sim": 1.0000000596046448,
-    "backbone_pla": 0.9252597838640213,
+    "backbone_pla": 0.9252597788969675,
     "backbone_novelty": 0.007023811340332031,
-    "backbone_dci": 0.1224139462520157
+    "backbone_dci": 0.12241394597939603
   },
   "dci_gap": 0.031193621025504492,
-  "composition": {
-    "train_shape_acc": 0.3333333333333333,
-    "train_color_acc": 0.25,
-    "test_shape_acc": 0.3333333333333333,
-    "test_color_acc": 0.0
+  "retention": {
+    "train_shape_ret": 0.7643292297919592,
+    "train_color_ret": 0.5654694214463234,
+    "test_shape_ret": 0.8010945916175842,
+    "test_color_ret": 0.5144746651252111
   },
   "random_baseline": {
     "random_0.05": {
@@ -70,10 +70,10 @@
   },
   "ablation": {
     "\u03bb_div=0": {
-      "cos_sim": 0.43865617116292316,
+      "cos_sim": 0.43865616122881573,
       "pla": 0.957258773346742,
       "novelty": 0.2440905769666036,
-      "dci": 0.5859608405499753,
+      "dci": 0.5859608428154264,
       "backbone_cos_sim": 1.0000000198682149,
       "backbone_pla": 0.9503614629308382,
       "backbone_novelty": 0.005121986071268718,
