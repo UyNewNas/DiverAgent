@@ -33,9 +33,9 @@ def main():
             shape_idx = shape_idx.to(DEVICE)
             color_idx = color_idx.to(DEVICE)
 
-            recon, _, _, _, _, obj_l, attr_l = model(x, shape_idx, color_idx)
+            recon, _, _, _, _, obj_l, attr_l, ce_s, ce_c = model(x, shape_idx, color_idx)
             recon_loss = F.mse_loss(recon, x)
-            loss = recon_loss + 0.1 * obj_l + 0.1 * attr_l
+            loss = recon_loss + 0.1 * obj_l + 0.1 * attr_l + 0.5 * ce_s + 0.5 * ce_c
 
             optimizer.zero_grad()
             loss.backward()

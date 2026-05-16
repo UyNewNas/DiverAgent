@@ -20,7 +20,7 @@ def build_memory_bank(model, loader, max_samples=NOVELTY_MEMORY_SIZE):
     with torch.no_grad():
         for x, shape_idx, color_idx, _, _ in tqdm(loader, desc='Memory'):
             x = x.to(DEVICE)
-            _, obj_emb, _, _, _, _, _ = model.backbone(x, shape_idx.to(DEVICE), color_idx.to(DEVICE))
+            _, obj_emb, _, _, _, _, _, _, _ = model.backbone(x, shape_idx.to(DEVICE), color_idx.to(DEVICE))
             embeddings.append(obj_emb.cpu())
             if len(torch.cat(embeddings)) >= max_samples:
                 break
@@ -66,7 +66,7 @@ def main():
             x = x.to(DEVICE)
 
             with torch.no_grad():
-                _, obj_emb, attr_emb, _, _, _, _ = model.backbone(
+                _, obj_emb, attr_emb, _, _, _, _, _, _ = model.backbone(
                     x, shape_idx.to(DEVICE), color_idx.to(DEVICE)
                 )
 

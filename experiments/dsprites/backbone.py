@@ -102,6 +102,8 @@ class DSpritesBackbone(nn.Module):
         self.object_embed = nn.Embedding(NUM_SHAPES, object_dim)
         self.attr_embed = nn.Embedding(NUM_COLORS, attr_dim)
         self.decoder = ConditionalDecoder(object_dim)
+        self.classifier_shape = nn.Linear(feature_dim, NUM_SHAPES)
+        self.classifier_color = nn.Linear(feature_dim, NUM_COLORS)
         self.object_dim = object_dim
         self.attr_dim = attr_dim
 
@@ -126,7 +128,11 @@ class DSpritesBackbone(nn.Module):
         obj_loss = F.mse_loss(obj_emb, obj_anchor)
         attr_loss = F.mse_loss(attr_emb, attr_anchor)
         recon = self.decode(obj_emb)
-        return recon, obj_emb, attr_emb, obj_anchor, attr_anchor, obj_loss, attr_loss
+        shape_logits = self.classifier_shape(feature)
+        color_logits = self.classifier_color(feature)
+        ce_shape = F.cross_entropy(shape_logits, shape_idx)
+        ce_color = F.cross_entropy(color_logits, color_idx)
+        return recon, obj_emb, attr_emb, obj_anchor, attr_anchor, obj_loss, attr_loss, ce_shape, ce_color
 
     def count_parameters(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
