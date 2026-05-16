@@ -104,14 +104,14 @@ def evaluate(model, loader, image_memory, tau=0.3):
     return {k: np.mean(v) for k, v in metrics.items()}
 
 
-def composition_accuracy(model, loader):
+def shape_color_retention(model, loader):
     model.eval()
-    correct_shape = 0
-    correct_color = 0
+    shape_ret = []
+    color_ret = []
     total = 0
 
     with torch.no_grad():
-        for x, shape_idx, color_idx, _, _ in tqdm(loader, desc='Composition'):
+        for x, shape_idx, color_idx, _, _ in tqdm(loader, desc='Retention'):
             x = x.to(DEVICE)
             _, obj_emb, attr_emb, _, _, _, _, _, _ = model.backbone(
                 x, shape_idx.to(DEVICE), color_idx.to(DEVICE)
@@ -120,22 +120,23 @@ def composition_accuracy(model, loader):
             best_out = outputs_k[:, 0]
 
             for i in range(x.size(0)):
-                feat = model.backbone.encoder(best_out[i:i+1])
-                obj_proj = model.backbone.object_proj(feat)
-                attr_proj = model.backbone.attr_proj(feat)
-                obj_sim = torch.mm(obj_proj, model.backbone.object_embed.weight.t())
-                attr_sim = torch.mm(attr_proj, model.backbone.attr_embed.weight.t())
-                pred_shape = obj_sim.argmax(dim=1).item()
-                pred_color = attr_sim.argmax(dim=1).item()
-                if pred_shape == shape_idx[i].item():
-                    correct_shape += 1
-                if pred_color == color_idx[i].item():
-                    correct_color += 1
+                feat_orig = model.backbone.encoder(x[i:i+1])
+                obj_orig = model.backbone.object_proj(feat_orig)
+                attr_orig = model.backbone.attr_proj(feat_orig)
+
+                feat_dec = model.backbone.encoder(best_out[i:i+1])
+                obj_dec = model.backbone.object_proj(feat_dec)
+                attr_dec = model.backbone.attr_proj(feat_dec)
+
+                obj_sim = F.cosine_similarity(obj_orig, obj_dec).item()
+                attr_sim = F.cosine_similarity(attr_orig, attr_dec).item()
+                shape_ret.append(obj_sim)
+                color_ret.append(attr_sim)
                 total += 1
 
     if total == 0:
         return 0.0, 0.0
-    return correct_shape / total, correct_color / total
+    return np.mean(shape_ret), np.mean(color_ret)
 
 
 def ablation_experiment(model, train_loader, eval_loader, image_memory):
@@ -235,11 +236,11 @@ def main():
     dci_gap = abs(test_metrics["dci"] - train_metrics["dci"])
     print(f'DCI gap (train - test): {dci_gap:.4f}')
 
-    print('\n--- Composition Accuracy ---')
-    train_s_acc, train_c_acc = composition_accuracy(model, train_eval_loader)
-    test_s_acc, test_c_acc = composition_accuracy(model, test_eval_loader)
-    print(f'Train: shape_acc={train_s_acc:.3f} color_acc={train_c_acc:.3f}')
-    print(f'Test:  shape_acc={test_s_acc:.3f} color_acc={test_c_acc:.3f}')
+    print('\n--- Shape/Color Retention (cosine similarity original vs decoded) ---')
+    train_s_ret, train_c_ret = shape_color_retention(model, train_eval_loader)
+    test_s_ret, test_c_ret = shape_color_retention(model, test_eval_loader)
+    print(f'Train: shape_ret={train_s_ret:.4f} color_ret={train_c_ret:.4f}')
+    print(f'Test:  shape_ret={test_s_ret:.4f} color_ret={test_c_ret:.4f}')
 
     print('\n--- Random Baseline ---')
     rand_results = random_baseline(model, test_eval_loader, image_memory)
@@ -251,11 +252,11 @@ def main():
         'train': train_metrics,
         'test': test_metrics,
         'dci_gap': dci_gap,
-        'composition': {
-            'train_shape_acc': train_s_acc,
-            'train_color_acc': train_c_acc,
-            'test_shape_acc': test_s_acc,
-            'test_color_acc': test_c_acc,
+        'retention': {
+            'train_shape_ret': train_s_ret,
+            'train_color_ret': train_c_ret,
+            'test_shape_ret': test_s_ret,
+            'test_color_ret': test_c_ret,
         },
         'random_baseline': {k: v for k, v in rand_results.items()},
         'ablation': {k: v for k, v in abl_results.items()},
