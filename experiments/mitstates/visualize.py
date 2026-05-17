@@ -27,7 +27,7 @@ def main():
         for x, attr_idx, obj_idx, attr_name, obj_name in loader:
             x = x.to(DEVICE)
             with torch.no_grad():
-                _, obj_e, attr_e, _, _, _, _, _ = model.backbone(
+                _, obj_e, attr_e, _, _, _, _ = model.backbone(
                     x, attr_idx.to(DEVICE), obj_idx.to(DEVICE)
                 )
                 recon = model.backbone.decode(obj_e)
