@@ -105,7 +105,7 @@ def evaluate(model, loader, image_memory, tau=TAU):
         x = x.to(DEVICE)
 
         with torch.no_grad():
-            _, obj_emb, attr_emb, _, _, _, _, _ = model.backbone(
+            _, obj_emb, attr_emb, _, _, _, _ = model.backbone(
                 x, attr_idx.to(DEVICE), obj_idx.to(DEVICE)
             )
 
@@ -147,7 +147,7 @@ def shape_color_retention(model, loader):
     with torch.no_grad():
         for x, attr_idx, obj_idx, _, _ in tqdm(loader, desc='Retention'):
             x = x.to(DEVICE)
-            _, obj_emb, attr_emb, _, _, _, _, _ = model.backbone(
+            _, obj_emb, attr_emb, _, _, _, _ = model.backbone(
                 x, attr_idx.to(DEVICE), obj_idx.to(DEVICE)
             )
             outputs_k, _, _ = model.forward_divergent(obj_emb, attr_emb)
@@ -206,7 +206,7 @@ def ablation_experiment(model, train_loader, eval_loader, image_memory):
             for x, attr_idx, obj_idx, _, _ in train_loader:
                 x = x.to(DEVICE)
                 with torch.no_grad():
-                    _, obj_e, attr_e, _, _, _, _, _ = m.backbone(
+                    _, obj_e, attr_e, _, _, _, _ = m.backbone(
                         x, attr_idx.to(DEVICE), obj_idx.to(DEVICE)
                     )
                 ok, zk, _ = m.forward_divergent(obj_e, attr_e)
