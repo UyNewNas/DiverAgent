@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torchvision import models
 
 from .config import (
     IMAGE_SIZE, OBJECT_DIM, ATTR_DIM, K_OUTPUTS,
@@ -10,15 +9,30 @@ from .config import (
 )
 
 
-class PretrainedEncoder(nn.Module):
+class CNNEncoder(nn.Module):
     def __init__(self, feature_dim=512):
         super().__init__()
-        resnet = models.resnet18(weights=models.ResNet18_Weights.IMAGENET1K_V1)
-        self.backbone = nn.Sequential(*list(resnet.children())[:-1])
-        self.fc = nn.Linear(512, feature_dim)
+        self.conv = nn.Sequential(
+            nn.Conv2d(3, 64, 4, 2, 1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(True),
+            nn.Conv2d(64, 128, 4, 2, 1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(True),
+            nn.Conv2d(128, 256, 4, 2, 1),
+            nn.BatchNorm2d(256),
+            nn.ReLU(True),
+            nn.Conv2d(256, 512, 4, 2, 1),
+            nn.BatchNorm2d(512),
+            nn.ReLU(True),
+            nn.Conv2d(512, 512, 4, 2, 1),
+            nn.BatchNorm2d(512),
+            nn.ReLU(True),
+        )
+        self.fc = nn.Linear(512 * 4 * 4, feature_dim)
 
     def forward(self, x):
-        h = self.backbone(x)
+        h = self.conv(x)
         h = h.view(h.size(0), -1)
         return self.fc(h)
 
@@ -86,7 +100,7 @@ class MITStatesBackbone(nn.Module):
     def __init__(self, feature_dim=512, object_dim=OBJECT_DIM, attr_dim=ATTR_DIM,
                  num_objects=50, num_attrs=50):
         super().__init__()
-        self.encoder = PretrainedEncoder(feature_dim)
+        self.encoder = CNNEncoder(feature_dim)
         self.object_proj = ObjectProjector(feature_dim, object_dim)
         self.attr_proj = AttributeProjector(feature_dim, attr_dim)
         self.object_embed = nn.Embedding(num_objects, object_dim)

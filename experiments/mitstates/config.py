@@ -15,5 +15,5 @@ LAMBDA_NOVELTY = 0.5
 NOVELTY_THRESHOLD = 0.80
 NOVELTY_MEMORY_SIZE = 4000
 DEVICE = 'cuda'
-DATA_URL = 'http://wednesday.csail.mit.edu/temporal/release/states_and_transformations.zip'
+DATA_URL = 'http://wednesday.csail.mit.edu/joseph_result/state_and_transformation/release_dataset.zip'
 TAU = 0.3
