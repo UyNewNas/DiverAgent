@@ -1,0 +1,62 @@
+import os, sys
+import torch
+import torch.nn.functional as F
+from tqdm import tqdm
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+
+from experiments.mitstates.config import (
+    BATCH_SIZE, BACKBONE_EPOCHS, BACKBONE_LR, DEVICE,
+)
+from experiments.mitstates.dataset import get_dataloaders
+from experiments.mitstates.backbone import MITStatesBackbone
+
+SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
+
+
+def main():
+    print(f'Device: {DEVICE}')
+    train_loader, _, _, _, num_attrs, num_objs = get_dataloaders(BATCH_SIZE)
+    print(f'Attributes: {num_attrs}, Objects: {num_objs}')
+
+    model = MITStatesBackbone(num_objects=num_objs, num_attrs=num_attrs).to(DEVICE)
+    print(f'Backbone params: {model.count_parameters():,}')
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=BACKBONE_LR)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=BACKBONE_EPOCHS)
+
+    best_loss = float('inf')
+    for epoch in range(BACKBONE_EPOCHS):
+        model.train()
+        total_loss = 0.0
+        pbar = tqdm(train_loader, desc=f'Epoch {epoch+1}/{BACKBONE_EPOCHS}')
+        for x, attr_idx, obj_idx, _, _ in pbar:
+            x = x.to(DEVICE)
+            attr_idx = attr_idx.to(DEVICE)
+            obj_idx = obj_idx.to(DEVICE)
+
+            recon, _, _, _, _, obj_l, attr_l = model(x, attr_idx, obj_idx)
+            recon_loss = F.mse_loss(recon, x)
+            loss = recon_loss + 0.1 * obj_l + 0.1 * attr_l
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            total_loss += loss.item()
+            pbar.set_postfix({'loss': f'{loss.item():.4f}'})
+
+        scheduler.step()
+        avg_loss = total_loss / len(train_loader)
+        print(f'Epoch {epoch+1}: avg_loss={avg_loss:.4f}')
+
+        if avg_loss < best_loss:
+            best_loss = avg_loss
+            torch.save(model.state_dict(), os.path.join(SAVE_DIR, 'backbone_best.pt'))
+
+    torch.save(model.state_dict(), os.path.join(SAVE_DIR, 'backbone_final.pt'))
+    print(f'Training complete. Best loss: {best_loss:.4f}')
+
+
+if __name__ == '__main__':
+    main()
