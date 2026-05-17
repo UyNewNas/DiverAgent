@@ -1,0 +1,143 @@
+{
+  "train": {
+    "cos_sim": 0.421175682495141,
+    "pla": 0.9493432641726398,
+    "novelty": 0.22352856434804239,
+    "dci": 0.5713235873039442,
+    "backbone_cos_sim": 1.0000000092938635,
+    "backbone_pla": 0.8666640791011947,
+    "backbone_novelty": 0.0033771248220653893,
+    "backbone_dci": 0.095692097051986,
+    "clip_combo": 0.0,
+    "clip_attr": 0.0,
+    "clip_obj": 0.0
+  },
+  "test": {
+    "cos_sim": 0.421268068253994,
+    "pla": 0.9481695031957521,
+    "novelty": 0.22370082188037135,
+    "dci": 0.571194768426071,
+    "backbone_cos_sim": 1.0000000091329697,
+    "backbone_pla": 0.8687145162914549,
+    "backbone_novelty": 0.003438689535663974,
+    "backbone_dci": 0.09597655894308367,
+    "clip_combo": 0.0,
+    "clip_attr": 0.0,
+    "clip_obj": 0.0
+  },
+  "dci_gap": 0.00012881887787319357,
+  "retention": {
+    "train_obj_ret": 0.4348229070057562,
+    "train_attr_ret": 0.9999983857488434,
+    "test_obj_ret": 0.40270204647931934,
+    "test_attr_ret": 0.9999983002752156
+  },
+  "random_baseline": {
+    "random_0.05": {
+      "cos_sim": 0.9988581490132117,
+      "pla": 0.8334309886540135,
+      "novelty": 0.014718898361729037,
+      "dci": 0.15437033909696546,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145162914549,
+      "backbone_novelty": 0.003438689535663974,
+      "backbone_dci": 0.09597655936775747,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "random_0.1": {
+      "cos_sim": 0.9958456447047572,
+      "pla": 0.842499534509355,
+      "novelty": 0.014779772008619001,
+      "dci": 0.15567783081063977,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145164116256,
+      "backbone_novelty": 0.0034386900163465932,
+      "backbone_dci": 0.095976564634495,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "random_0.3": {
+      "cos_sim": 0.9752106248371063,
+      "pla": 0.867294593684135,
+      "novelty": 0.016953451498862234,
+      "dci": 0.16827976844060935,
+      "backbone_cos_sim": 1.0000000081716045,
+      "backbone_pla": 0.8687145163515403,
+      "backbone_novelty": 0.003438689535663974,
+      "backbone_dci": 0.09597655977729422,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "random_0.5": {
+      "cos_sim": 0.9474848677073756,
+      "pla": 0.8851843041878554,
+      "novelty": 0.022105627482937228,
+      "dci": 0.19026972104405268,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145160511136,
+      "backbone_novelty": 0.003438689054981355,
+      "backbone_dci": 0.09597655440283137,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    }
+  },
+  "ablation": {
+    "\u03bb_div=0": {
+      "cos_sim": 0.46677264451019224,
+      "pla": 0.9701140818839532,
+      "novelty": 0.2174778167278536,
+      "dci": 0.5601771747888575,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145162914549,
+      "backbone_novelty": 0.003438689054981355,
+      "backbone_dci": 0.09597655368502046,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "\u03bb_pla=0": {
+      "cos_sim": 0.2993870975990449,
+      "pla": 0.8610844183713198,
+      "novelty": 0.3113613873720169,
+      "dci": 0.6445855489275978,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145164116256,
+      "backbone_novelty": 0.003438689535663974,
+      "backbone_dci": 0.09597655937254693,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "\u03bb_nov=0": {
+      "cos_sim": 0.298898137865528,
+      "pla": 0.970101585735627,
+      "novelty": 0.33109261095523834,
+      "dci": 0.6845274430067707,
+      "backbone_cos_sim": 1.0000000081716045,
+      "backbone_pla": 0.8687145164116256,
+      "backbone_novelty": 0.003438689054981355,
+      "backbone_dci": 0.09597655378620212,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    },
+    "full": {
+      "cos_sim": 0.3007008608791136,
+      "pla": 0.9700530417030677,
+      "novelty": 0.3604636495151827,
+      "dci": 0.7041634034717285,
+      "backbone_cos_sim": 1.0000000091329697,
+      "backbone_pla": 0.8687145161712843,
+      "backbone_novelty": 0.003438689535663974,
+      "backbone_dci": 0.09597655936340035,
+      "clip_combo": 0.0,
+      "clip_attr": 0.0,
+      "clip_obj": 0.0
+    }
+  }
+}
