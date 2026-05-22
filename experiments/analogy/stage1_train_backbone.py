@@ -10,6 +10,7 @@ from experiments.analogy.config import (
 )
 from experiments.analogy.dataset import get_dataloaders
 from experiments.analogy.backbone import AnalogyBackbone
+from experiments.analogy.tee_logger import setup_logger
 
 SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
 LOG_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -18,6 +19,9 @@ LOG_DIR = os.path.join(os.path.dirname(__file__), 'results')
 def main():
     os.makedirs(SAVE_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
+
+    log_path = os.path.join(LOG_DIR, 'train_stage1.log')
+    tee = setup_logger(log_path)
 
     print(f'Device: {DEVICE}')
     train_loader, test_loader, embeddings, vocab, train_ds, test_ds = \
@@ -33,8 +37,6 @@ def main():
     )
 
     best_loss = float('inf')
-    log_path = os.path.join(LOG_DIR, 'train_stage1.log')
-    log_f = open(log_path, 'w')
 
     for epoch in range(BACKBONE_EPOCHS):
         model.train()
@@ -70,11 +72,8 @@ def main():
         avg_loss = total_loss / len(train_loader)
         avg_recon = total_recon / len(train_loader)
         avg_align = total_align / len(train_loader)
-        msg = (f'Epoch {epoch+1}: loss={avg_loss:.4f} '
-               f'recon={avg_recon:.4f} align={avg_align:.4f}')
-        print(msg)
-        log_f.write(msg + '\n')
-        log_f.flush()
+        print(f'Epoch {epoch+1}: loss={avg_loss:.4f} '
+              f'recon={avg_recon:.4f} align={avg_align:.4f}')
 
         if avg_loss < best_loss:
             best_loss = avg_loss
@@ -84,9 +83,9 @@ def main():
 
     torch.save(model.state_dict(),
                os.path.join(SAVE_DIR, 'backbone_final.pt'))
-    log_f.close()
     print(f'Training complete. Best loss: {best_loss:.4f}')
     print(f'Log saved to {log_path}')
+    tee.close()
 
 
 if __name__ == '__main__':

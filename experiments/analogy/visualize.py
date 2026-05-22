@@ -10,6 +10,7 @@ from experiments.analogy.config import DEVICE, K_OUTPUTS
 from experiments.analogy.dataset import get_dataloaders
 from experiments.analogy.backbone import AnalogyCBDP
 from experiments.analogy.evaluate import evaluate, build_tail_memory
+from experiments.analogy.tee_logger import setup_logger
 
 SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
 RESULT_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -30,6 +31,10 @@ def nearest_words(embeddings, vocab, query_emb, top_k=5):
 
 
 def visualize():
+    os.makedirs(RESULT_DIR, exist_ok=True)
+    log_path = os.path.join(RESULT_DIR, 'visualize.log')
+    tee = setup_logger(log_path)
+
     train_loader, test_loader, embeddings, vocab, train_ds, test_ds = \
         get_dataloaders(256)
 
@@ -167,6 +172,7 @@ def visualize():
         rel = fc['relation']
         rel_counts[rel] = rel_counts.get(rel, 0) + 1
     print(f'\n  Failure modes by relation type: {rel_counts}')
+    tee.close()
 
 
 def cosine_pairwise_sim(outputs_k):

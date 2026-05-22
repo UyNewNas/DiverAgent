@@ -1,81 +1,247 @@
+Extracting relation triples from WordNet (may take a few minutes)...
+Splitting triples...
+  WARNING: 1177 pairs overlap between train/test!
+Train triples: 72799, Test triples: 18196
+Building tail embedding memory...
+Memory:   0%|          | 0/284 [00:00<?, ?it/s]Memory:   4%|3         | 11/284 [00:00<00:01, 159.95it/s]
+
+================================================================================
 Phase 3: Analogy Visualization
 ================================================================================
 
---- Case 1: hostess --[hypernym]--> host ---
+--- Case 1: hostess --[hypernym]--> ? ---
   True tail: host
-  Best K: k=2 (cos=0.5714)
-  Top k=2 nearest: play(0.705), game(0.650), playing(0.646)
-  All cos: 0.1645, 0.2990, 0.5714*, 0.3372, -0.1805, 0.3564, 0.4355, 0.5549
+  Best matching K: k=6
+  Cos similarity to true tail per output:
+    k=0: cos=0.4257
+    k=1: cos=0.2884
+    k=2: cos=0.3402
+    k=3: cos=0.4176
+    k=4: cos=0.2997
+    k=5: cos=0.3256
+    k=6: cos=0.4726 <<<
+    k=7: cos=-0.2583
+  Nearest words for each candidate:
+    k=0 (cos=0.4257): come(0.783), n't(0.774), take(0.772)
+    k=1 (cos=0.2884): take(0.578), going(0.577), you(0.566)
+    k=2 (cos=0.3402): ,(0.618), last(0.602), official(0.591)
+    k=3 (cos=0.4176): only(0.703), one(0.701), person(0.687)
+    k=4 (cos=0.2997): play(0.632), chance(0.624), going(0.605)
+    k=5 (cos=0.3256): got(0.665), play(0.648), game(0.642)
+    k=6 (cos=0.4726): play(0.652), player(0.640), game(0.637)
+    k=7 (cos=-0.2583): mangxamba(0.735), tom.fowler@chron.com(0.733), el1l(0.727)
 
---- Case 2: fit --[hypernym]--> manner ---
+--- Case 2: fit --[hypernym]--> ? ---
   True tail: manner
-  Best K: k=3 (cos=0.3817)
-  Top k=3 nearest: should(0.834), could(0.832), make(0.830)
-  Note: "manner" is very abstract; cos_sim to true tail is moderate
+  Best matching K: k=0
+  Cos similarity to true tail per output:
+    k=0: cos=0.4315 <<<
+    k=1: cos=0.3449
+    k=2: cos=0.2645
+    k=3: cos=0.3341
+    k=4: cos=0.4004
+    k=5: cos=0.3922
+    k=6: cos=0.1939
+    k=7: cos=0.0242
+  Nearest words for each candidate:
+    k=0 (cos=0.4315): should(0.831), would(0.825), not(0.810)
+    k=1 (cos=0.3449): you(0.574), take(0.573), 'll(0.568)
+    k=2 (cos=0.2645): but(0.736), chance(0.729), just(0.720)
+    k=3 (cos=0.3341): able(0.711), understand(0.699), learn(0.676)
+    k=4 (cos=0.4004): going(0.613), play(0.611), chance(0.610)
+    k=5 (cos=0.3922): you(0.762), so(0.735), even(0.722)
+    k=6 (cos=0.1939): pretend(0.552), able(0.541), invent(0.539)
+    k=7 (cos=0.0242): deconstruct(0.593), dissect(0.581), humanize(0.550)
 
---- Case 3: metazoan --[hypernym]--> animal ---
+--- Case 3: metazoan --[hypernym]--> ? ---
   True tail: animal
-  Best K: k=6 (cos=0.3644)
-  Top k=6 nearest: organisms(0.620), fungi(0.589), organism(0.581)
-  Good semantic category capture (organism)
+  Best matching K: k=6
+  Cos similarity to true tail per output:
+    k=0: cos=0.3689
+    k=1: cos=0.3276
+    k=2: cos=0.3084
+    k=3: cos=0.3996
+    k=4: cos=0.2793
+    k=5: cos=0.4290
+    k=6: cos=0.4290 <<<
+    k=7: cos=0.2382
+  Nearest words for each candidate:
+    k=0 (cos=0.3689): organism(0.769), organisms(0.658), pathogen(0.647)
+    k=1 (cos=0.3276): you(0.594), someone(0.568), n't(0.557)
+    k=2 (cos=0.3084): organism(0.758), proteins(0.716), organisms(0.660)
+    k=3 (cos=0.3996): organism(0.826), organisms(0.723), proteins(0.698)
+    k=4 (cos=0.2793): kind(0.605), sort(0.589), look(0.585)
+    k=5 (cos=0.4290): organism(0.758), cells(0.682), proteins(0.678)
+    k=6 (cos=0.4290): organism(0.830), organisms(0.715), pathogen(0.679)
+    k=7 (cos=0.2382): organism(0.747), pathogen(0.731), fungus(0.688)
 
---- Case 4: air --[hypernym]--> gas ---
+--- Case 4: air --[hypernym]--> ? ---
   True tail: gas
-  Best K: k=0 (cos=0.4902) or k=2 (cos=0.4901)
-  Top k=0 nearest: device(0.606), devices(0.595), use(0.593)
-  Semantic drift: "air" related outputs drift to technical/human contexts
+  Best matching K: k=5
+  Cos similarity to true tail per output:
+    k=0: cos=0.2996
+    k=1: cos=0.1431
+    k=2: cos=0.3876
+    k=3: cos=0.4189
+    k=4: cos=0.0861
+    k=5: cos=0.4411 <<<
+    k=6: cos=0.4073
+    k=7: cos=-0.1373
+  Nearest words for each candidate:
+    k=0 (cos=0.2996): particular(0.725), rather(0.712), example(0.709)
+    k=1 (cos=0.1431): you(0.535), get(0.518), take(0.515)
+    k=2 (cos=0.3876): area(0.698), the(0.696), part(0.675)
+    k=3 (cos=0.4189): water(0.668), quality(0.644), dry(0.594)
+    k=4 (cos=0.0861): going(0.593), play(0.592), chance(0.586)
+    k=5 (cos=0.4411): water(0.594), smoke(0.586), liquid(0.574)
+    k=6 (cos=0.4073): liquid(0.577), temperature(0.558), water(0.545)
+    k=7 (cos=-0.1373): embellish(0.562), deconstruct(0.555), characterise(0.540)
 
---- Case 5: delicacy --[hypernym]--> smallness ---
+--- Case 5: delicacy --[hypernym]--> ? ---
   True tail: smallness
-  Best K: k=0 (cos=0.4865)
-  Top k=0 nearest: mangxamba(0.691), tom.fowler@chron.com(0.659), rungfapaisarn(0.656)
-  Failure mode: rare word in GloVe → nearest neighbor picks noise
+  Best matching K: k=7
+  Cos similarity to true tail per output:
+    k=0: cos=-0.1997
+    k=1: cos=-0.1118
+    k=2: cos=0.1508
+    k=3: cos=0.1642
+    k=4: cos=-0.0481
+    k=5: cos=0.0834
+    k=6: cos=0.2954
+    k=7: cos=0.3867 <<<
+  Nearest words for each candidate:
+    k=0 (cos=-0.1997): example(0.693), which(0.681), same(0.677)
+    k=1 (cos=-0.1118): you(0.566), 'll(0.540), get(0.535)
+    k=2 (cos=0.1508): taste(0.628), qualities(0.603), quality(0.575)
+    k=3 (cos=0.1642): taste(0.789), flavor(0.721), mixture(0.657)
+    k=4 (cos=-0.0481): look(0.578), kind(0.575), play(0.568)
+    k=5 (cos=0.0834): color(0.723), colors(0.683), bright(0.634)
+    k=6 (cos=0.2954): freshness(0.596), taste(0.560), sweetness(0.552)
+    k=7 (cos=0.3867): tom.fowler@chron.com(0.762), thongrung(0.752), mangxamba(0.752)
 
---- Case 6: undertaking --[hypernym]--> work ---
+--- Case 6: undertaking --[hypernym]--> ? ---
   True tail: work
-  Best K: k=3 (cos=0.6512) ← BEST CASE
-  Top k=3 nearest: plan(0.689), should(0.686), agreement(0.684)
-  Excellent semantic match: "plan" and "agreement" are near synonyms of "work"
+  Best matching K: k=4
+  Cos similarity to true tail per output:
+    k=0: cos=0.4510
+    k=1: cos=0.4245
+    k=2: cos=0.4635
+    k=3: cos=0.3987
+    k=4: cos=0.5270 <<<
+    k=5: cos=0.3950
+    k=6: cos=0.2788
+    k=7: cos=0.1223
+  Nearest words for each candidate:
+    k=0 (cos=0.4510): companies(0.736), market(0.691), business(0.684)
+    k=1 (cos=0.4245): take(0.547), you(0.547), get(0.545)
+    k=2 (cos=0.4635): companies(0.744), business(0.720), company(0.716)
+    k=3 (cos=0.3987): companies(0.727), products(0.724), export(0.690)
+    k=4 (cos=0.5270): how(0.625), look(0.624), what(0.621)
+    k=5 (cos=0.3950): sell(0.714), companies(0.679), buy(0.667)
+    k=6 (cos=0.2788): export(0.696), companies(0.689), profits(0.677)
+    k=7 (cos=0.1223): mass-produce(0.469), reproductions(0.462), high-quality(0.456)
 
---- Case 7: conk --[hypernym]--> hit ---
+--- Case 7: conk --[hypernym]--> ? ---
   True tail: hit
-  Best K: k=3 (cos=0.5904)
-  Top k=3 nearest: get(0.756), just(0.750), back(0.740)
-  Good directional match
+  Best matching K: k=2
+  Cos similarity to true tail per output:
+    k=0: cos=0.5148
+    k=1: cos=0.2288
+    k=2: cos=0.5373 <<<
+    k=3: cos=0.3295
+    k=4: cos=0.2236
+    k=5: cos=0.2837
+    k=6: cos=0.2519
+    k=7: cos=0.0956
+  Nearest words for each candidate:
+    k=0 (cos=0.5148): but(0.711), because(0.700), even(0.694)
+    k=1 (cos=0.2288): you(0.567), 'll(0.553), going(0.540)
+    k=2 (cos=0.5373): chest(0.628), right(0.617), stomach(0.611)
+    k=3 (cos=0.3295): nose(0.651), neck(0.643), legs(0.641)
+    k=4 (cos=0.2236): play(0.602), kind(0.577), look(0.570)
+    k=5 (cos=0.2837): neck(0.655), nose(0.648), forehead(0.627)
+    k=6 (cos=0.2519): nose(0.702), skin(0.678), legs(0.642)
+    k=7 (cos=0.0956): blade(0.501), forehead(0.497), strap(0.497)
 
---- Case 8: freshness --[hypernym]--> originality ---
+--- Case 8: freshness --[hypernym]--> ? ---
   True tail: originality
-  Best K: k=2 (cos=0.5235)
-  Top k=2 nearest: playfulness(0.684), cleverness(0.612), liveliness(0.599)
-  Good: semantically related to "originality" (creativity attributes)
+  Best matching K: k=2
+  Cos similarity to true tail per output:
+    k=0: cos=0.0453
+    k=1: cos=0.0609
+    k=2: cos=0.6005 <<<
+    k=3: cos=0.5582
+    k=4: cos=0.2179
+    k=5: cos=0.2789
+    k=6: cos=0.2959
+    k=7: cos=0.5378
+  Nearest words for each candidate:
+    k=0 (cos=0.0453): because(0.690), effect(0.679), rather(0.663)
+    k=1 (cos=0.0609): you(0.568), get(0.533), 'll(0.532)
+    k=2 (cos=0.6005): playfulness(0.719), liveliness(0.665), cleverness(0.655)
+    k=3 (cos=0.5582): playfulness(0.664), expressiveness(0.633), smoothness(0.621)
+    k=4 (cos=0.2179): kind(0.604), sort(0.579), look(0.574)
+    k=5 (cos=0.2789): vibration(0.496), disorienting(0.463), smoothness(0.460)
+    k=6 (cos=0.2959): mangxamba(0.592), zety(0.568), ___________________________________________________________(0.561)
+    k=7 (cos=0.5378): playfulness(0.688), timelessness(0.652), thoughtfulness(0.648)
 
---- Case 9: double --[hypernym]--> stand-in ---
+--- Case 9: double --[hypernym]--> ? ---
   True tail: stand-in
-  Best K: k=4 (cos=0.1709)
-  Top k=4 nearest: amplitude(0.561), thickness(0.544), angular(0.543)
-  FAILURE: cos_sim very low for all K outputs; "stand-in" is a rare/multi-sense word
+  Best matching K: k=7
+  Cos similarity to true tail per output:
+    k=0: cos=-0.2622
+    k=1: cos=0.0071
+    k=2: cos=-0.1349
+    k=3: cos=-0.1861
+    k=4: cos=-0.0348
+    k=5: cos=-0.0593
+    k=6: cos=-0.0423
+    k=7: cos=0.1737 <<<
+  Nearest words for each candidate:
+    k=0 (cos=-0.2622): would(0.766), should(0.744), could(0.742)
+    k=1 (cos=0.0071): take(0.583), going(0.575), you(0.570)
+    k=2 (cos=-0.1349): hit(0.814), off(0.671), hitting(0.649)
+    k=3 (cos=-0.1861): result(0.637), that(0.631), increase(0.630)
+    k=4 (cos=-0.0348): play(0.616), chance(0.599), going(0.594)
+    k=5 (cos=-0.0593): function(0.646), i.e.(0.603), shape(0.595)
+    k=6 (cos=-0.0423): calculate(0.606), absorb(0.528), multiply(0.522)
+    k=7 (cos=0.1737): necessitates(0.540), protrusion(0.515), asymmetry(0.510)
 
---- Case 10: rash --[hypernym]--> series ---
+--- Case 10: rash --[hypernym]--> ? ---
   True tail: series
-  Best K: k=3 (cos=0.3544)
-  Top k=3 nearest: kind(0.794), sort(0.762), what(0.755)
-  Moderate: "kind" and "sort" are related to categories, but not "series"
+  Best matching K: k=4
+  Cos similarity to true tail per output:
+    k=0: cos=0.1847
+    k=1: cos=0.2492
+    k=2: cos=0.1668
+    k=3: cos=0.1406
+    k=4: cos=0.3273 <<<
+    k=5: cos=-0.0102
+    k=6: cos=-0.0978
+    k=7: cos=-0.3126
+  Nearest words for each candidate:
+    k=0 (cos=0.1847): would(0.648), prevent(0.640), should(0.633)
+    k=1 (cos=0.2492): you(0.570), going(0.562), 'll(0.561)
+    k=2 (cos=0.1668): causing(0.575), caused(0.538), could(0.525)
+    k=3 (cos=0.1406): flooding(0.639), caused(0.633), storms(0.624)
+    k=4 (cos=0.3273): play(0.581), chance(0.581), kind(0.576)
+    k=5 (cos=-0.0102): slices(0.544), slice(0.534), brush(0.528)
+    k=6 (cos=-0.0978): dissipate(0.541), irritation(0.524), nervousness(0.516)
+    k=7 (cos=-0.3126): artificiality(0.613), meanness(0.611), frivolity(0.592)
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  17%|#6        | 12/72 [00:00<00:00, 118.84it/s]Evaluate:  49%|####8     | 35/72 [00:00<00:00, 183.50it/s]Evaluate:  82%|########1 | 59/72 [00:00<00:00, 205.77it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 195.53it/s]
 
 ================================================================================
-Failure Case Analysis (Lowest DCI on Test Set)
+Failure Case Analysis (Lowest DCI)
 ================================================================================
-  1. wei --[hypernym]--> dynasty (DCI=0.6205)
-  2. intolerance --[hypernym]--> impatience (DCI=0.6563)
-  3. bullring --[hypernym]--> stadium (DCI=0.6594)
-  4. pelvis --[hypernym]--> girdle (DCI=0.6605)
-  5. lap --[hypernym]--> thigh (DCI=0.6620)
-  6. railhead --[hypernym]--> storehouse (DCI=0.6666)
-  7. reset --[hypernym]--> specify (DCI=0.6675)
-  8. punctuate --[hypernym]--> add (DCI=0.6681)
-  9. rarity --[hypernym]--> scarcity (DCI=0.6691)
+  1. rarity --[hypernym]--> scarcity (DCI=0.6658)
+  2. metazoan --[hypernym]--> animal (DCI=0.6665)
+  3. lurch --[hypernym]--> motion (DCI=0.667)
+  4. intussusception --[hypernym]--> growth (DCI=0.6674)
+  5. admission --[hypernym]--> entrance (DCI=0.6674)
+  6. bullring --[hypernym]--> stadium (DCI=0.6674)
+  7. telomerase --[hypernym]--> enzyme (DCI=0.6682)
+  8. delicacy --[hypernym]--> smallness (DCI=0.6682)
+  9. firmness --[hypernym]--> hardness (DCI=0.6691)
   10. maker --[hypernym]--> creator (DCI=0.6693)
 
-Failure pattern: ALL 10 are hypernym relations.
-Most failures involve rare or domain-specific words (wei, bullring, railhead).
-Even the worst case (DCI=0.6205) is above the acceptance baseline (0.35).
-No catastrophic failures observed.
+  Failure modes by relation type: {'hypernym': 10}

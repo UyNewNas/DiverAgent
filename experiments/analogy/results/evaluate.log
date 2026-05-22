@@ -1,38 +1,59 @@
+Loaded CBDP model.
+Probe: 472,065 params (0.39% of backbone)
+Building tail embedding memory...
+Memory:   0%|          | 0/284 [00:00<?, ?it/s]Memory:   4%|3         | 11/284 [00:00<00:01, 149.72it/s]
+
+============================================================
 Phase 3: WordNet Analogy Evaluation
 ============================================================
 
-Device: cpu
-Data: Train=72799 triples, Test=18196 triples
-Model: AnalogyCBDP, Probe=472,065 params (0.39% of backbone)
-Memory bank: 3000 tail embeddings
-
 --- Train Pairs ---
-Backbone: cos=1.0000 pla=0.8547 nov=0.3579 DCI=0.4510
-CBDP:     cos=0.3694 pla=0.9050 nov=0.3936 DCI=0.6921
-Top-1 Acc=0.1036 Top-3 Acc=0.2320 Distinct-K=0.9141
+Evaluate:   0%|          | 0/284 [00:00<?, ?it/s]Evaluate:   0%|          | 1/284 [00:00<01:08,  4.11it/s]Evaluate:   8%|8         | 24/284 [00:00<00:02, 86.77it/s]Evaluate:  17%|#6        | 47/284 [00:00<00:01, 135.94it/s]Evaluate:  25%|##4       | 70/284 [00:00<00:01, 166.31it/s]Evaluate:  32%|###2      | 92/284 [00:00<00:01, 181.46it/s]Evaluate:  40%|###9      | 113/284 [00:00<00:00, 185.90it/s]Evaluate:  48%|####7     | 135/284 [00:00<00:00, 195.72it/s]Evaluate:  56%|#####5    | 158/284 [00:00<00:00, 204.44it/s]Evaluate:  63%|######3   | 180/284 [00:01<00:00, 207.13it/s]Evaluate:  71%|#######1  | 202/284 [00:01<00:00, 209.91it/s]Evaluate:  80%|#######9  | 226/284 [00:01<00:00, 216.36it/s]Evaluate:  87%|########7 | 248/284 [00:01<00:00, 216.16it/s]Evaluate:  95%|#########5| 270/284 [00:01<00:00, 216.04it/s]Evaluate: 100%|##########| 284/284 [00:01<00:00, 183.85it/s]
+Backbone: cos=1.0000 pla=0.8478 nov=0.3571 DCI=0.4495
+CBDP:     cos=0.3523 pla=0.9041 nov=0.3936 DCI=0.6961
+Top-1 Acc=0.0965 Top-3 Acc=0.2631 Distinct-K=0.9400
 
 --- Test Pairs ---
-Backbone: cos=1.0000 pla=0.8199 nov=0.3712 DCI=0.4492
-CBDP:     cos=0.3643 pla=0.8818 nov=0.3993 DCI=0.6887
-Top-1 Acc=0.1508 Top-3 Acc=0.3107 Distinct-K=0.9221
-DCI gap (train - test): 0.0034
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  33%|###3      | 24/72 [00:00<00:00, 233.68it/s]Evaluate:  67%|######6   | 48/72 [00:00<00:00, 230.60it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 231.53it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 231.43it/s]
+Backbone: cos=1.0000 pla=0.8058 nov=0.3693 DCI=0.4426
+CBDP:     cos=0.3494 pla=0.8817 nov=0.3989 DCI=0.6905
+Top-1 Acc=0.1903 Top-3 Acc=0.3926 Distinct-K=0.9465
+DCI gap (train - test): 0.0056
 
---- Random Baseline (Test) ---
-random_0.05: DCI=0.5187 cos_sim=0.8622
-random_0.1:  DCI=0.5965 cos_sim=0.6737
-random_0.3:  DCI=0.7197 cos_sim=0.2810  (best random)
-random_0.5:  DCI=0.6921 cos_sim=0.1761
+--- Random Baseline ---
 
-CBDP (0.6887) vs Random Best (0.7197): Δ=-4.3%
+--- Random baseline: scale=0.05 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  26%|##6       | 19/72 [00:00<00:00, 186.74it/s]Evaluate:  61%|######1   | 44/72 [00:00<00:00, 220.71it/s]Evaluate:  93%|#########3| 67/72 [00:00<00:00, 210.57it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 209.76it/s]
+  DCI=0.5148 cos_sim=0.8637
 
---- Ablation (Test, fresh init 10 epochs) ---
-full:     DCI=0.6772 cos_sim=0.3677
-λ_div=0:  DCI=0.6218 cos_sim=0.5781  (-8.2% from full)
-λ_pla=0:  DCI=0.7128 cos_sim=0.2837  (+5.3% from full)
-λ_nov=0:  DCI=0.6810 cos_sim=0.3740  (+0.6% from full)
+--- Random baseline: scale=0.1 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  33%|###3      | 24/72 [00:00<00:00, 233.09it/s]Evaluate:  68%|######8   | 49/72 [00:00<00:00, 237.53it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 241.71it/s]
+  DCI=0.5928 cos_sim=0.6755
 
-Key finding: Divergence loss is critical (removal drops DCI 8.2%).
-Plausibility loss is counterproductive in embedding space
-(removal improves DCI 5.3% to 0.7128, matching random baseline).
+--- Random baseline: scale=0.3 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  35%|###4      | 25/72 [00:00<00:00, 241.32it/s]Evaluate:  69%|######9   | 50/72 [00:00<00:00, 237.51it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 237.03it/s]
+  DCI=0.7107 cos_sim=0.2916
 
-Results saved to phase3_results.json
+--- Random baseline: scale=0.5 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  33%|###3      | 24/72 [00:00<00:00, 231.63it/s]Evaluate:  67%|######6   | 48/72 [00:00<00:00, 233.92it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 233.02it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 232.88it/s]
+  DCI=0.6890 cos_sim=0.2017
+
+--- Ablation (test pairs) ---
+
+--- Ablation: λ_div=0 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  29%|##9       | 21/72 [00:00<00:00, 205.07it/s]Evaluate:  60%|#####9    | 43/72 [00:00<00:00, 206.88it/s]Evaluate:  92%|#########1| 66/72 [00:00<00:00, 216.25it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 216.49it/s]
+  DCI=0.6208 cos_sim=0.5845
+
+--- Ablation: λ_pla=0 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  28%|##7       | 20/72 [00:00<00:00, 194.92it/s]Evaluate:  58%|#####8    | 42/72 [00:00<00:00, 205.19it/s]Evaluate:  90%|######### | 65/72 [00:00<00:00, 213.66it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 212.00it/s]
+  DCI=0.7013 cos_sim=0.2336
+
+--- Ablation: λ_nov=0 ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  31%|###       | 22/72 [00:00<00:00, 211.41it/s]Evaluate:  61%|######1   | 44/72 [00:00<00:00, 214.35it/s]Evaluate:  92%|#########1| 66/72 [00:00<00:00, 212.10it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 214.63it/s]
+  DCI=0.6735 cos_sim=0.3617
+
+--- Ablation: full ---
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  31%|###       | 22/72 [00:00<00:00, 219.38it/s]Evaluate:  61%|######1   | 44/72 [00:00<00:00, 215.30it/s]Evaluate:  92%|#########1| 66/72 [00:00<00:00, 217.08it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 218.72it/s]
+  DCI=0.6697 cos_sim=0.3863
+
+Results saved to g:\githubwk\DiverAgent\experiments\analogy\results\phase3_results.json

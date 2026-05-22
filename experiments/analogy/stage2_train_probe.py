@@ -9,6 +9,7 @@ from experiments.analogy.config import (
 )
 from experiments.analogy.dataset import get_dataloaders
 from experiments.analogy.backbone import AnalogyCBDP
+from experiments.analogy.tee_logger import setup_logger
 
 SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
 LOG_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -33,6 +34,9 @@ def build_memory_bank(model, loader, max_samples=NOVELTY_MEMORY_SIZE):
 
 
 def main():
+    log_path = os.path.join(LOG_DIR, 'train_stage2.log')
+    tee = setup_logger(log_path)
+
     train_loader, test_loader, embeddings, vocab, train_ds, test_ds = \
         get_dataloaders(BATCH_SIZE)
     print(f'Train: {len(train_ds)}, Test: {len(test_ds)}')
@@ -58,9 +62,6 @@ def main():
         list(model.probe.parameters()) + list(model.gate.parameters()),
         lr=PROBE_LR,
     )
-
-    log_path = os.path.join(LOG_DIR, 'train_stage2.log')
-    log_f = open(log_path, 'w')
 
     print(f'\nTraining directional probe (K={model.k_outputs} outputs)...')
     for epoch in range(PROBE_EPOCHS):
@@ -99,15 +100,12 @@ def main():
 
         for k in epoch_losses:
             epoch_losses[k] /= n_batches
-        msg = (f'Epoch {epoch+1}: ' +
-               ', '.join(f'{k}={v:.4f}' for k, v in epoch_losses.items()))
-        print(msg)
-        log_f.write(msg + '\n')
-        log_f.flush()
+        print(f'Epoch {epoch+1}: ' +
+              ', '.join(f'{k}={v:.4f}' for k, v in epoch_losses.items()))
 
     torch.save(model.state_dict(), os.path.join(SAVE_DIR, 'cbdp_full.pt'))
-    log_f.close()
     print('Probe training complete. Model saved.')
+    tee.close()
 
 
 if __name__ == '__main__':

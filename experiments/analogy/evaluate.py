@@ -14,6 +14,7 @@ from experiments.analogy.dataset import get_dataloaders
 from experiments.analogy.backbone import (
     AnalogyCBDP, diversity_loss, plausibility_loss,
 )
+from experiments.analogy.tee_logger import setup_logger
 
 SAVE_DIR = os.path.join(os.path.dirname(__file__), 'checkpoints')
 RESULT_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -204,6 +205,10 @@ def main():
     train_loader, test_loader, embeddings, vocab, train_ds, test_ds = \
         get_dataloaders(BATCH_SIZE)
 
+    os.makedirs(RESULT_DIR, exist_ok=True)
+    log_path = os.path.join(RESULT_DIR, 'evaluate.log')
+    tee = setup_logger(log_path)
+
     model = AnalogyCBDP(embeddings=embeddings).to(DEVICE)
     ckpt = os.path.join(SAVE_DIR, 'cbdp_full.pt')
     if not os.path.exists(ckpt):
@@ -273,6 +278,7 @@ def main():
     with open(result_path, 'w') as f:
         json.dump(all_results, f, indent=2, default=lambda x: float(x) if isinstance(x, (np.floating,)) else x)
     print(f'\nResults saved to {result_path}')
+    tee.close()
     return all_results
 
 
