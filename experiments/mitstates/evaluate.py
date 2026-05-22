@@ -188,8 +188,7 @@ def random_baseline(model, eval_loader, image_memory):
     return results
 
 
-def ablation_experiment(model, train_loader, eval_loader, image_memory):
-    import copy
+def ablation_experiment(model, train_loader, eval_loader, image_memory, num_objs, num_attrs):
     configs = [
         ('λ_div=0', (0.0, LAMBDA_PLAUSIBILITY, LAMBDA_NOVELTY)),
         ('λ_pla=0', (LAMBDA_DIVERSITY, 0.0, LAMBDA_NOVELTY)),
@@ -199,7 +198,8 @@ def ablation_experiment(model, train_loader, eval_loader, image_memory):
     results = {}
     for label, lambdas in configs:
         print(f'\n--- Ablation: {label} ---')
-        m = copy.deepcopy(model).to(DEVICE)
+        m = MITStatesCBDP(num_objects=num_objs, num_attrs=num_attrs).to(DEVICE)
+        m.backbone.load_state_dict(model.backbone.state_dict())
         m.freeze_backbone()
         opt = torch.optim.Adam(list(m.probe.parameters()) + list(m.gate.parameters()), lr=1e-3)
         for ep in range(10):
@@ -286,7 +286,7 @@ def main():
     rand_results = random_baseline(model, test_loader, image_memory)
 
     print('\n--- Ablation (test pairs) ---')
-    abl_results = ablation_experiment(model, train_loader, test_loader, image_memory)
+    abl_results = ablation_experiment(model, train_loader, test_loader, image_memory, num_objs, num_attrs)
 
     all_results = {
         'train': train_metrics,

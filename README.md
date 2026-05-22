@@ -115,17 +115,29 @@ where `divergence_quality = max(0, 1 - |cos_sim - τ|)` with τ = 0.3.
 
 | Metric | Backbone (baseline) | CBDP (full) |
 |---|---|---|
-| **DCI (train)** | 0.096 | **0.571** |
-| **DCI (test, unseen combos)** | 0.096 | **0.571** |
+| **DCI (train)** | 0.083 | **0.580** |
+| **DCI (test, unseen combos)** | 0.083 | **0.580** |
 | Cosine similarity (test) | 1.000 | **0.421** |
 | Plausibility (test) | 0.869 | **0.948** |
-| Novelty (test) | 0.003 | **0.224** |
+| Novelty (test) | 0.002 | **0.234** |
 | **Train-test DCI gap** | — | **~0.0001** |
 | Object retention (test) | — | **0.403** |
 | Attribute retention (test) | — | **~1.000** |
-| **CBDP vs Random baseline** | — | **+270%** |
+| **CBDP vs Random baseline** | — | **+275%** |
 
-**Key finding**: Near-zero train-test DCI gap on MIT-States demonstrates strong generalization to completely unseen attribute-object compositions.
+**Ablation (test set, fresh probe init)**:
+
+| Config | DCI | cos_sim | novelty |
+|---|---|---|---|
+| **Full** | **0.575** | 0.381 | 0.215 |
+| λ_div = 0 | 0.241 | 0.928 | 0.041 |
+| λ_pla = 0 | 0.501 | 0.429 | 0.167 |
+| λ_nov = 0 | 0.520 | 0.368 | 0.158 |
+
+**Key findings**:
+- Near-zero train-test DCI gap demonstrates strong generalization to unseen attribute-object compositions.
+- Corrected ablation (fresh random probe init, not deepcopy from trained) confirms all three loss terms are critical — λ_div ablation drops DCI to 0.241, the largest single impact.
+- Diversity (cos_sim=0.421) still deviates from target τ=0.3, and novelty (0.234) remains constrained, indicating the probe struggles to escape the well-converged backbone latent space.
 
 ---
 
