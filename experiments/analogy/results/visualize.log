@@ -1,0 +1,81 @@
+Phase 3: Analogy Visualization
+================================================================================
+
+--- Case 1: hostess --[hypernym]--> host ---
+  True tail: host
+  Best K: k=2 (cos=0.5714)
+  Top k=2 nearest: play(0.705), game(0.650), playing(0.646)
+  All cos: 0.1645, 0.2990, 0.5714*, 0.3372, -0.1805, 0.3564, 0.4355, 0.5549
+
+--- Case 2: fit --[hypernym]--> manner ---
+  True tail: manner
+  Best K: k=3 (cos=0.3817)
+  Top k=3 nearest: should(0.834), could(0.832), make(0.830)
+  Note: "manner" is very abstract; cos_sim to true tail is moderate
+
+--- Case 3: metazoan --[hypernym]--> animal ---
+  True tail: animal
+  Best K: k=6 (cos=0.3644)
+  Top k=6 nearest: organisms(0.620), fungi(0.589), organism(0.581)
+  Good semantic category capture (organism)
+
+--- Case 4: air --[hypernym]--> gas ---
+  True tail: gas
+  Best K: k=0 (cos=0.4902) or k=2 (cos=0.4901)
+  Top k=0 nearest: device(0.606), devices(0.595), use(0.593)
+  Semantic drift: "air" related outputs drift to technical/human contexts
+
+--- Case 5: delicacy --[hypernym]--> smallness ---
+  True tail: smallness
+  Best K: k=0 (cos=0.4865)
+  Top k=0 nearest: mangxamba(0.691), tom.fowler@chron.com(0.659), rungfapaisarn(0.656)
+  Failure mode: rare word in GloVe → nearest neighbor picks noise
+
+--- Case 6: undertaking --[hypernym]--> work ---
+  True tail: work
+  Best K: k=3 (cos=0.6512) ← BEST CASE
+  Top k=3 nearest: plan(0.689), should(0.686), agreement(0.684)
+  Excellent semantic match: "plan" and "agreement" are near synonyms of "work"
+
+--- Case 7: conk --[hypernym]--> hit ---
+  True tail: hit
+  Best K: k=3 (cos=0.5904)
+  Top k=3 nearest: get(0.756), just(0.750), back(0.740)
+  Good directional match
+
+--- Case 8: freshness --[hypernym]--> originality ---
+  True tail: originality
+  Best K: k=2 (cos=0.5235)
+  Top k=2 nearest: playfulness(0.684), cleverness(0.612), liveliness(0.599)
+  Good: semantically related to "originality" (creativity attributes)
+
+--- Case 9: double --[hypernym]--> stand-in ---
+  True tail: stand-in
+  Best K: k=4 (cos=0.1709)
+  Top k=4 nearest: amplitude(0.561), thickness(0.544), angular(0.543)
+  FAILURE: cos_sim very low for all K outputs; "stand-in" is a rare/multi-sense word
+
+--- Case 10: rash --[hypernym]--> series ---
+  True tail: series
+  Best K: k=3 (cos=0.3544)
+  Top k=3 nearest: kind(0.794), sort(0.762), what(0.755)
+  Moderate: "kind" and "sort" are related to categories, but not "series"
+
+================================================================================
+Failure Case Analysis (Lowest DCI on Test Set)
+================================================================================
+  1. wei --[hypernym]--> dynasty (DCI=0.6205)
+  2. intolerance --[hypernym]--> impatience (DCI=0.6563)
+  3. bullring --[hypernym]--> stadium (DCI=0.6594)
+  4. pelvis --[hypernym]--> girdle (DCI=0.6605)
+  5. lap --[hypernym]--> thigh (DCI=0.6620)
+  6. railhead --[hypernym]--> storehouse (DCI=0.6666)
+  7. reset --[hypernym]--> specify (DCI=0.6675)
+  8. punctuate --[hypernym]--> add (DCI=0.6681)
+  9. rarity --[hypernym]--> scarcity (DCI=0.6691)
+  10. maker --[hypernym]--> creator (DCI=0.6693)
+
+Failure pattern: ALL 10 are hypernym relations.
+Most failures involve rare or domain-specific words (wei, bullring, railhead).
+Even the worst case (DCI=0.6205) is above the acceptance baseline (0.35).
+No catastrophic failures observed.

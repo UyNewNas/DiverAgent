@@ -29,5 +29,6 @@ Thumbs.db
 .ipynb_checkpoints/
 
 # Internal working documents
-docs/
+docs/*
+!docs/*.md
 .trae/

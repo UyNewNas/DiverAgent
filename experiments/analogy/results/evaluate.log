@@ -1,0 +1,38 @@
+Phase 3: WordNet Analogy Evaluation
+============================================================
+
+Device: cpu
+Data: Train=72799 triples, Test=18196 triples
+Model: AnalogyCBDP, Probe=472,065 params (0.39% of backbone)
+Memory bank: 3000 tail embeddings
+
+--- Train Pairs ---
+Backbone: cos=1.0000 pla=0.8547 nov=0.3579 DCI=0.4510
+CBDP:     cos=0.3694 pla=0.9050 nov=0.3936 DCI=0.6921
+Top-1 Acc=0.1036 Top-3 Acc=0.2320 Distinct-K=0.9141
+
+--- Test Pairs ---
+Backbone: cos=1.0000 pla=0.8199 nov=0.3712 DCI=0.4492
+CBDP:     cos=0.3643 pla=0.8818 nov=0.3993 DCI=0.6887
+Top-1 Acc=0.1508 Top-3 Acc=0.3107 Distinct-K=0.9221
+DCI gap (train - test): 0.0034
+
+--- Random Baseline (Test) ---
+random_0.05: DCI=0.5187 cos_sim=0.8622
+random_0.1:  DCI=0.5965 cos_sim=0.6737
+random_0.3:  DCI=0.7197 cos_sim=0.2810  (best random)
+random_0.5:  DCI=0.6921 cos_sim=0.1761
+
+CBDP (0.6887) vs Random Best (0.7197): Δ=-4.3%
+
+--- Ablation (Test, fresh init 10 epochs) ---
+full:     DCI=0.6772 cos_sim=0.3677
+λ_div=0:  DCI=0.6218 cos_sim=0.5781  (-8.2% from full)
+λ_pla=0:  DCI=0.7128 cos_sim=0.2837  (+5.3% from full)
+λ_nov=0:  DCI=0.6810 cos_sim=0.3740  (+0.6% from full)
+
+Key finding: Divergence loss is critical (removal drops DCI 8.2%).
+Plausibility loss is counterproductive in embedding space
+(removal improves DCI 5.3% to 0.7128, matching random baseline).
+
+Results saved to phase3_results.json
