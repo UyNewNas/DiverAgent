@@ -17,6 +17,7 @@ venv/
 
 # Model checkpoints (large files)
 experiments/*/checkpoints/*.pt
+experiments/*/checkpoints/**/*.pt
 
 # Raw datasets
 experiments/*/data/*

@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 from experiments.analogy.config import (
     BATCH_SIZE, K_OUTPUTS, DEVICE, TAU, EMBED_DIM,
     LAMBDA_DIVERSITY, LAMBDA_PLAUSIBILITY, LAMBDA_NOVELTY,
+    RELATION_TYPES,
 )
 from experiments.analogy.dataset import get_dataloaders
 from experiments.analogy.backbone import (
@@ -149,7 +150,7 @@ def random_baseline(model, eval_loader, tail_memory):
             z_flat = z_k.reshape(B2 * K2, D2)
             zeros = [
                 torch.zeros(B2 * K2, HIDDEN_DIM, device=DEVICE)
-                for _ in range(3)
+                for _ in range(4)
             ]
             return z_k, transport, zeros
 
@@ -199,6 +200,42 @@ def ablation_experiment(model, train_loader, eval_loader, tail_memory, embedding
         results[label] = metrics
         print(f'  DCI={metrics["dci"]:.4f} cos_sim={metrics["cos_sim"]:.4f}')
     return results
+
+
+def per_relation_evaluate(model, test_ds, tail_memory):
+    from torch.utils.data import DataLoader
+    from experiments.analogy.dataset import collate_analogy
+
+    rel_triples = {rel: [] for rel in RELATION_TYPES}
+    for i, (h, rel, t) in enumerate(test_ds.triples):
+        rel_triples[rel].append(i)
+
+    rel_results = {}
+    print('\n--- Per-Relation Evaluation ---')
+    for rel_name, indices in rel_triples.items():
+        if len(indices) == 0:
+            continue
+        subset = torch.utils.data.Subset(test_ds, indices)
+        loader = DataLoader(
+            subset, batch_size=BATCH_SIZE, shuffle=False,
+            collate_fn=collate_analogy, drop_last=False,
+        )
+        metrics = evaluate(model, loader, tail_memory)
+        rel_results[rel_name] = {
+            'count': len(indices),
+            'dci': round(metrics['dci'], 4),
+            'cos_sim': round(metrics['cos_sim'], 4),
+            'pla': round(metrics['pla'], 4),
+            'novelty': round(metrics['novelty'], 4),
+            'top1_acc': round(metrics['top1_acc'], 4),
+            'top3_acc': round(metrics['top3_acc'], 4),
+            'distinct_k': round(metrics['distinct_k'], 4),
+        }
+        print(f'  {rel_name:12s} (n={len(indices):5d}): '
+              f'DCI={metrics["dci"]:.4f} '
+              f'Top-3={metrics["top3_acc"]:.4f} '
+              f'Dist-K={metrics["distinct_k"]:.4f}')
+    return rel_results
 
 
 def main():
@@ -265,12 +302,16 @@ def main():
         model, train_loader, test_loader, tail_memory, embeddings
     )
 
+    print('\n--- Per-Relation Breakdown ---')
+    rel_results = per_relation_evaluate(model, test_ds, tail_memory)
+
     all_results = {
         'train': train_metrics,
         'test': test_metrics,
         'dci_gap': dci_gap,
         'random_baseline': rand_results,
         'ablation': abl_results,
+        'per_relation': rel_results,
     }
 
     os.makedirs(RESULT_DIR, exist_ok=True)
