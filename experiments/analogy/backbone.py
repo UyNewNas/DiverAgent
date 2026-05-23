@@ -17,8 +17,6 @@ class AnalogyEncoder(nn.Module):
             nn.ReLU(True),
             nn.Linear(hidden_dim, hidden_dim),
             nn.ReLU(True),
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.ReLU(True),
             nn.Linear(hidden_dim, relation_dim),
         )
 
@@ -33,8 +31,7 @@ class AnalogyDecoder(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, hidden_dim)
         self.fc3 = nn.Linear(hidden_dim, hidden_dim)
-        self.fc4 = nn.Linear(hidden_dim, hidden_dim)
-        self.fc5 = nn.Linear(hidden_dim, output_dim)
+        self.fc4 = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, z, injections=None):
         h = self.fc1(z)
@@ -50,10 +47,6 @@ class AnalogyDecoder(nn.Module):
             h = h + injections[2]
         h = F.relu(h)
         h = self.fc4(h)
-        if injections is not None:
-            h = h + injections[3]
-        h = F.relu(h)
-        h = self.fc5(h)
         return h
 
 
@@ -107,7 +100,6 @@ class DirectionalProbe(nn.Module):
         self.inj_mlp_0 = nn.Linear(relation_dim, HIDDEN_DIM)
         self.inj_mlp_1 = nn.Linear(relation_dim, HIDDEN_DIM)
         self.inj_mlp_2 = nn.Linear(relation_dim, HIDDEN_DIM)
-        self.inj_mlp_3 = nn.Linear(relation_dim, HIDDEN_DIM)
 
     def forward(self, head_emb, rel_vec, rel_emb):
         combined = torch.cat([head_emb, rel_vec], dim=-1)
@@ -121,7 +113,6 @@ class DirectionalProbe(nn.Module):
             self.inj_mlp_0(z_flat),
             self.inj_mlp_1(z_flat),
             self.inj_mlp_2(z_flat),
-            self.inj_mlp_3(z_flat),
         ]
         return z_k, transport, injections
 

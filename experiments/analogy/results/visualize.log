@@ -3,7 +3,7 @@ Splitting triples...
   WARNING: 1177 pairs overlap between train/test!
 Train triples: 72799, Test triples: 18196
 Building tail embedding memory...
-Memory:   0%|          | 0/284 [00:00<?, ?it/s]Memory:   0%|          | 1/284 [00:00<01:44,  2.70it/s]Memory:   4%|3         | 11/284 [00:00<00:09, 29.44it/s]Memory:   4%|3         | 11/284 [00:00<00:12, 22.71it/s]
+Memory:   0%|          | 0/284 [00:00<?, ?it/s]Memory:   4%|3         | 11/284 [00:00<00:02, 108.81it/s]Memory:   4%|3         | 11/284 [00:00<00:02, 105.15it/s]
 
 ================================================================================
 Phase 3: Analogy Visualization
@@ -11,317 +11,237 @@ Phase 3: Analogy Visualization
 
 --- Case 1: hostess --[hypernym]--> ? ---
   True tail: host
-  Best matching K: k=10
+  Best matching K: k=0
   Cos similarity to true tail per output:
-    k=0: cos=-0.1078
-    k=1: cos=0.2007
-    k=2: cos=0.0371
-    k=3: cos=0.3323
-    k=4: cos=-0.2105
-    k=5: cos=0.2733
-    k=6: cos=0.2713
-    k=7: cos=-0.1853
-    k=8: cos=0.3091
-    k=9: cos=0.2431
-    k=10: cos=0.3815 <<<
-    k=11: cos=0.0999
+    k=0: cos=0.4923 <<<
+    k=1: cos=0.3800
+    k=2: cos=0.1792
+    k=3: cos=0.3652
+    k=4: cos=0.4489
+    k=5: cos=0.2363
+    k=6: cos=0.3387
+    k=7: cos=-0.2566
   Nearest words for each candidate:
-    k=0 (cos=-0.1078): bisexuality(0.463), intimacy(0.459), wholeness(0.458)
-    k=1 (cos=0.2007): investigations(0.418), investigation(0.416), officials(0.414)
-    k=2 (cos=0.0371): lover(0.491), mother(0.486), love(0.448)
-    k=3 (cos=0.3323): wife(0.598), mother(0.597), music(0.594)
-    k=4 (cos=-0.2105): acianthera(0.537), plectrohyla(0.522), agelena(0.521)
-    k=5 (cos=0.2733): because(0.632), the(0.599), same(0.596)
-    k=6 (cos=0.2713): kind(0.590), you(0.582), eating(0.569)
-    k=7 (cos=-0.1853): desirability(0.410), viewpoint(0.409), epistemological(0.405)
-    k=8 (cos=0.3091): fact(0.686), what(0.685), even(0.667)
-    k=9 (cos=0.2431): example(0.630), rather(0.623), instance(0.613)
-    k=10 (cos=0.3815): the(0.583), fact(0.572), this(0.559)
-    k=11 (cos=0.0999): father(0.525), mother(0.499), husband(0.494)
+    k=0 (cos=0.4923): but(0.674), one(0.672), both(0.670)
+    k=1 (cos=0.3800): would(0.776), should(0.759), to(0.757)
+    k=2 (cos=0.1792): buyer(0.450), owner(0.422), decides(0.399)
+    k=3 (cos=0.3652): person(0.887), woman(0.744), man(0.743)
+    k=4 (cos=0.4489): one(0.677), who(0.667), another(0.652)
+    k=5 (cos=0.2363): you(0.679), instead(0.653), kind(0.648)
+    k=6 (cos=0.3387): would(0.729), but(0.715), if(0.713)
+    k=7 (cos=-0.2566): rw96(0.735), rungfapaisarn(0.730), _____________(0.727)
 
 --- Case 2: fit --[hypernym]--> ? ---
   True tail: manner
-  Best matching K: k=8
+  Best matching K: k=3
   Cos similarity to true tail per output:
-    k=0: cos=-0.0926
-    k=1: cos=0.0921
-    k=2: cos=0.3312
-    k=3: cos=0.3132
-    k=4: cos=0.0603
-    k=5: cos=0.3387
-    k=6: cos=0.4116
-    k=7: cos=-0.0960
-    k=8: cos=0.4156 <<<
-    k=9: cos=0.3368
-    k=10: cos=0.4055
-    k=11: cos=0.3695
+    k=0: cos=0.3754
+    k=1: cos=0.3889
+    k=2: cos=0.0611
+    k=3: cos=0.4806 <<<
+    k=4: cos=0.3028
+    k=5: cos=0.2580
+    k=6: cos=0.2293
+    k=7: cos=-0.0488
   Nearest words for each candidate:
-    k=0 (cos=-0.0926): equality(0.414), spirituality(0.401), uniqueness(0.389)
-    k=1 (cos=0.0921): forces(0.536), troops(0.512), to(0.490)
-    k=2 (cos=0.3312): perceive(0.521), confuse(0.507), interfere(0.505)
-    k=3 (cos=0.3132): you(0.632), n't(0.625), even(0.614)
-    k=4 (cos=0.0603): encapsulate(0.483), insinuate(0.476), disinclination(0.464)
-    k=5 (cos=0.3387): because(0.627), could(0.623), might(0.617)
-    k=6 (cos=0.4116): kind(0.630), rather(0.628), something(0.607)
-    k=7 (cos=-0.0960): generalization(0.350), corresponds(0.344), definitions(0.339)
-    k=8 (cos=0.4156): should(0.748), what(0.734), how(0.720)
-    k=9 (cos=0.3368): might(0.643), reduce(0.635), could(0.631)
-    k=10 (cos=0.4055): cannot(0.621), should(0.606), might(0.600)
-    k=11 (cos=0.3695): able(0.565), rather(0.554), can(0.548)
+    k=0 (cos=0.3754): able(0.785), do(0.757), want(0.742)
+    k=1 (cos=0.3889): would(0.833), could(0.812), but(0.806)
+    k=2 (cos=0.0611): deconstruct(0.625), dissect(0.619), visualize(0.607)
+    k=3 (cos=0.4806): change(0.792), rather(0.728), should(0.717)
+    k=4 (cos=0.3028): able(0.730), you(0.710), 'll(0.703)
+    k=5 (cos=0.2580): surface(0.608), thick(0.588), shape(0.583)
+    k=6 (cos=0.2293): play(0.780), game(0.738), just(0.727)
+    k=7 (cos=-0.0488): mangxamba(0.578), characterise(0.565), rosnazura(0.556)
 
 --- Case 3: metazoan --[hypernym]--> ? ---
   True tail: animal
-  Best matching K: k=9
+  Best matching K: k=6
   Cos similarity to true tail per output:
-    k=0: cos=0.0641
-    k=1: cos=-0.1028
-    k=2: cos=0.0894
-    k=3: cos=0.3965
-    k=4: cos=-0.0264
-    k=5: cos=0.4086
-    k=6: cos=0.5411
-    k=7: cos=-0.0777
-    k=8: cos=0.0919
-    k=9: cos=0.6333 <<<
-    k=10: cos=0.2963
-    k=11: cos=0.1735
+    k=0: cos=0.3865
+    k=1: cos=0.4325
+    k=2: cos=0.3209
+    k=3: cos=0.4396
+    k=4: cos=0.3789
+    k=5: cos=0.2315
+    k=6: cos=0.5118 <<<
+    k=7: cos=-0.0712
   Nearest words for each candidate:
-    k=0 (cos=0.0641): uniqueness(0.541), originality(0.539), simplicity(0.527)
-    k=1 (cos=-0.1028): mali(0.429), maghreb(0.416), berber(0.413)
-    k=2 (cos=0.0894): plectrohyla(0.512), mangxamba(0.510), microorganism(0.508)
-    k=3 (cos=0.3965): herb(0.485), taste(0.467), kind(0.441)
-    k=4 (cos=-0.0264): pseudoeurycea(0.673), pristimantis(0.665), dichomeris(0.663)
-    k=5 (cos=0.4086): child(0.586), because(0.569), example(0.564)
-    k=6 (cos=0.5411): organism(0.727), insect(0.704), organisms(0.703)
-    k=7 (cos=-0.0777): petroleum-based(0.438), triviality(0.413), asceticism(0.395)
-    k=8 (cos=0.0919): archosaur(0.565), theropod(0.519), archosauriform(0.518)
-    k=9 (cos=0.6333): animals(0.636), animal(0.633), fish(0.583)
-    k=10 (cos=0.2963): mammals(0.452), snakes(0.414), creatures(0.414)
-    k=11 (cos=0.1735): crustacean(0.599), fungi(0.576), micro-organisms(0.561)
+    k=0 (cos=0.3865): organism(0.809), organisms(0.709), cells(0.703)
+    k=1 (cos=0.4325): that(0.757), because(0.740), this(0.738)
+    k=2 (cos=0.3209): organism(0.780), pathogen(0.704), bacterium(0.694)
+    k=3 (cos=0.4396): cells(0.736), tissues(0.727), tissue(0.713)
+    k=4 (cos=0.3789): organism(0.804), organisms(0.700), cells(0.655)
+    k=5 (cos=0.2315): nucleus(0.558), membrane(0.538), organism(0.536)
+    k=6 (cos=0.5118): cells(0.623), tissue(0.592), disease(0.590)
+    k=7 (cos=-0.0712): mangxamba(0.710), tom.fowler@chron.com(0.673), ___________________________________________________________(0.663)
 
 --- Case 4: air --[hypernym]--> ? ---
   True tail: gas
-  Best matching K: k=9
+  Best matching K: k=4
   Cos similarity to true tail per output:
-    k=0: cos=-0.1161
-    k=1: cos=0.0956
-    k=2: cos=0.0506
-    k=3: cos=0.3006
-    k=4: cos=-0.0572
-    k=5: cos=0.3855
-    k=6: cos=0.4117
-    k=7: cos=-0.0403
-    k=8: cos=0.2956
-    k=9: cos=0.5647 <<<
-    k=10: cos=0.2445
-    k=11: cos=0.4174
+    k=0: cos=0.2789
+    k=1: cos=0.3555
+    k=2: cos=0.1634
+    k=3: cos=0.4254
+    k=4: cos=0.4883 <<<
+    k=5: cos=0.3140
+    k=6: cos=0.2975
+    k=7: cos=-0.0356
   Nearest words for each candidate:
-    k=0 (cos=-0.1161): well-being(0.507), equality(0.490), intimacy(0.473)
-    k=1 (cos=0.0956): matters(0.461), experts(0.455), enforcement(0.445)
-    k=2 (cos=0.0506): perceive(0.488), inhibit(0.472), evolve(0.464)
-    k=3 (cos=0.3006): kind(0.699), something(0.671), you(0.667)
-    k=4 (cos=-0.0572): mangxamba(0.530), lamoria(0.492), incandescence(0.488)
-    k=5 (cos=0.3855): part(0.680), area(0.633), region(0.624)
-    k=6 (cos=0.4117): kind(0.561), water(0.554), rather(0.554)
-    k=7 (cos=-0.0403): emphasizing(0.464), adherence(0.452), stressing(0.445)
-    k=8 (cos=0.2956): this(0.728), what(0.719), rather(0.711)
-    k=9 (cos=0.5647): supply(0.647), increase(0.625), fuel(0.624)
-    k=10 (cos=0.2445): the(0.531), would(0.528), therefore(0.522)
-    k=11 (cos=0.4174): liquid(0.574), oxygen(0.544), hydrogen(0.525)
+    k=0 (cos=0.2789): quality(0.885), lack(0.616), ability(0.614)
+    k=1 (cos=0.3555): should(0.776), need(0.765), would(0.764)
+    k=2 (cos=0.1634): modify(0.591), analyze(0.572), standardize(0.568)
+    k=3 (cos=0.4254): water(0.607), well(0.601), because(0.589)
+    k=4 (cos=0.4883): water(0.752), dry(0.643), liquid(0.586)
+    k=5 (cos=0.3140): particular(0.688), therefore(0.678), hence(0.655)
+    k=6 (cos=0.2975): just(0.754), but(0.739), only(0.725)
+    k=7 (cos=-0.0356): frivolity(0.540), uniformity(0.536), pretension(0.536)
 
 --- Case 5: delicacy --[hypernym]--> ? ---
   True tail: smallness
-  Best matching K: k=4
+  Best matching K: k=7
   Cos similarity to true tail per output:
-    k=0: cos=0.3307
-    k=1: cos=-0.1215
-    k=2: cos=0.2923
-    k=3: cos=0.1093
-    k=4: cos=0.3800 <<<
-    k=5: cos=-0.1591
-    k=6: cos=0.0357
-    k=7: cos=0.3026
-    k=8: cos=-0.0521
-    k=9: cos=-0.0390
-    k=10: cos=-0.0405
-    k=11: cos=0.1906
+    k=0: cos=0.3111
+    k=1: cos=-0.1705
+    k=2: cos=0.4192
+    k=3: cos=0.2708
+    k=4: cos=0.1843
+    k=5: cos=0.0943
+    k=6: cos=0.0341
+    k=7: cos=0.5318 <<<
   Nearest words for each candidate:
-    k=0 (cos=0.3307): presumption(0.512), uniqueness(0.474), finality(0.465)
-    k=1 (cos=-0.1215): inheritance(0.355), tax(0.346), taxes(0.323)
-    k=2 (cos=0.2923): theatricality(0.456), extravagance(0.453), reverence(0.451)
-    k=3 (cos=0.1093): fun(0.457), spectacle(0.452), passion(0.438)
-    k=4 (cos=0.3800): lamoria(0.545), falseness(0.541), mangxamba(0.538)
-    k=5 (cos=-0.1591): because(0.719), the(0.682), this(0.674)
-    k=6 (cos=0.0357): dish(0.685), taste(0.657), vegetables(0.637)
-    k=7 (cos=0.3026): dichotomy(0.460), generalized(0.456), inequality(0.454)
-    k=8 (cos=-0.0521): kind(0.717), what(0.687), sort(0.682)
-    k=9 (cos=-0.0390): food(0.633), quality(0.623), products(0.613)
-    k=10 (cos=-0.0405): because(0.665), might(0.661), rather(0.654)
-    k=11 (cos=0.1906): toxicity(0.465), delicacy(0.459), liver(0.434)
+    k=0 (cos=0.3111): freshness(0.654), elegance(0.639), originality(0.611)
+    k=1 (cos=-0.1705): not(0.789), because(0.782), so(0.780)
+    k=2 (cos=0.4192): playfulness(0.577), liveliness(0.542), effervescence(0.540)
+    k=3 (cos=0.2708): taste(0.651), sweetness(0.583), qualities(0.582)
+    k=4 (cos=0.1843): taste(0.795), flavor(0.709), ingredients(0.640)
+    k=5 (cos=0.0943): shaped(0.544), distinctive(0.540), shapes(0.533)
+    k=6 (cos=0.0341): something(0.706), kind(0.704), sort(0.673)
+    k=7 (cos=0.5318): mangxamba(0.680), rw97(0.669), zety(0.665)
 
 --- Case 6: undertaking --[hypernym]--> ? ---
   True tail: work
-  Best matching K: k=8
+  Best matching K: k=1
   Cos similarity to true tail per output:
-    k=0: cos=-0.1146
-    k=1: cos=-0.0988
-    k=2: cos=0.4128
-    k=3: cos=0.5145
-    k=4: cos=-0.1023
-    k=5: cos=0.4091
-    k=6: cos=0.4492
-    k=7: cos=-0.0184
-    k=8: cos=0.6483 <<<
-    k=9: cos=0.4990
-    k=10: cos=0.4581
-    k=11: cos=0.5823
+    k=0: cos=0.3096
+    k=1: cos=0.6421 <<<
+    k=2: cos=0.2861
+    k=3: cos=0.4660
+    k=4: cos=0.4049
+    k=5: cos=0.3802
+    k=6: cos=0.6102
+    k=7: cos=-0.2587
   Nearest words for each candidate:
-    k=0 (cos=-0.1146): equality(0.455), secularism(0.406), ethnicity(0.406)
-    k=1 (cos=-0.0988): oman(0.356), saudi(0.335), bahrain(0.333)
-    k=2 (cos=0.4128): need(0.495), encourage(0.490), should(0.468)
-    k=3 (cos=0.5145): kind(0.579), this(0.568), book(0.568)
-    k=4 (cos=-0.1023): writerly(0.487), digression(0.474), obviate(0.470)
-    k=5 (cos=0.4091): letter(0.617), statement(0.605), saying(0.593)
-    k=6 (cos=0.4492): addition(0.556), purchase(0.544), use(0.543)
-    k=7 (cos=-0.0184): affirm(0.440), reaffirm(0.419), untenable(0.406)
-    k=8 (cos=0.6483): would(0.701), could(0.690), because(0.685)
-    k=9 (cos=0.4990): trade(0.632), economic(0.624), growing(0.623)
-    k=10 (cos=0.4581): saying(0.605), government(0.595), intended(0.589)
-    k=11 (cos=0.5823): need(0.637), should(0.635), rather(0.619)
+    k=0 (cos=0.3096): export(0.703), companies(0.699), market(0.693)
+    k=1 (cos=0.6421): should(0.685), government(0.674), that(0.670)
+    k=2 (cos=0.2861): export(0.603), goods(0.583), products(0.581)
+    k=3 (cos=0.4660): products(0.624), product(0.622), business(0.621)
+    k=4 (cos=0.4049): companies(0.723), products(0.708), company(0.687)
+    k=5 (cos=0.3802): you(0.574), just(0.571), up(0.569)
+    k=6 (cos=0.6102): kind(0.626), own(0.621), shows(0.618)
+    k=7 (cos=-0.2587): mangxamba(0.627), el1l(0.620), tom.fowler@chron.com(0.609)
 
 --- Case 7: conk --[hypernym]--> ? ---
   True tail: hit
-  Best matching K: k=8
+  Best matching K: k=6
   Cos similarity to true tail per output:
-    k=0: cos=-0.1959
-    k=1: cos=0.2581
-    k=2: cos=-0.0152
-    k=3: cos=0.2393
-    k=4: cos=-0.2667
-    k=5: cos=0.2902
-    k=6: cos=0.2051
-    k=7: cos=-0.1574
-    k=8: cos=0.3271 <<<
-    k=9: cos=0.2633
-    k=10: cos=0.2345
-    k=11: cos=-0.1052
+    k=0: cos=0.3229
+    k=1: cos=0.2947
+    k=2: cos=0.1405
+    k=3: cos=0.4669
+    k=4: cos=0.2229
+    k=5: cos=0.3209
+    k=6: cos=0.6452 <<<
+    k=7: cos=-0.2789
   Nearest words for each candidate:
-    k=0 (cos=-0.1959): absurdity(0.494), artifice(0.475), playfulness(0.468)
-    k=1 (cos=0.2581): american(0.488), training(0.487), took(0.479)
-    k=2 (cos=-0.0152): petulant(0.409), pout(0.409), bleed(0.395)
-    k=3 (cos=0.2393): skin(0.661), nose(0.640), neck(0.605)
-    k=4 (cos=-0.2667): mangxamba(0.516), acianthera(0.514), chloropaschia(0.503)
-    k=5 (cos=0.2902): cause(0.561), possibly(0.553), because(0.548)
-    k=6 (cos=0.2051): inside(0.549), like(0.535), kind(0.520)
-    k=7 (cos=-0.1574): inequity(0.452), underlies(0.432), detriment(0.428)
-    k=8 (cos=0.3271): kind(0.598), person(0.587), one(0.586)
-    k=9 (cos=0.2633): water(0.618), could(0.579), because(0.578)
-    k=10 (cos=0.2345): could(0.618), not(0.604), might(0.603)
-    k=11 (cos=-0.1052): diaphragm(0.471), radiator(0.434), anus(0.427)
+    k=0 (cos=0.3229): nose(0.707), tail(0.686), legs(0.670)
+    k=1 (cos=0.2947): should(0.771), would(0.770), to(0.763)
+    k=2 (cos=0.1405): forehead(0.599), forearm(0.540), nose(0.537)
+    k=3 (cos=0.4669): you(0.682), hand(0.646), 'll(0.637)
+    k=4 (cos=0.2229): neck(0.695), legs(0.672), tail(0.667)
+    k=5 (cos=0.3209): shaped(0.611), plastic(0.610), inside(0.593)
+    k=6 (cos=0.6452): ball(0.686), back(0.656), hit(0.645)
+    k=7 (cos=-0.2789): mangxamba(0.560), brett.clanton@chron.com(0.555), el1l(0.550)
 
 --- Case 8: freshness --[hypernym]--> ? ---
   True tail: originality
-  Best matching K: k=2
+  Best matching K: k=3
   Cos similarity to true tail per output:
-    k=0: cos=0.3850
-    k=1: cos=-0.0155
-    k=2: cos=0.4046 <<<
-    k=3: cos=0.3152
-    k=4: cos=0.2878
-    k=5: cos=0.0149
-    k=6: cos=0.1708
-    k=7: cos=0.1377
-    k=8: cos=0.2253
-    k=9: cos=0.2279
-    k=10: cos=0.2724
-    k=11: cos=0.2837
+    k=0: cos=0.5773
+    k=1: cos=0.2200
+    k=2: cos=0.3274
+    k=3: cos=0.5885 <<<
+    k=4: cos=0.5515
+    k=5: cos=0.2278
+    k=6: cos=0.3174
+    k=7: cos=0.3128
   Nearest words for each candidate:
-    k=0 (cos=0.3850): uniqueness(0.532), presumption(0.494), finality(0.476)
-    k=1 (cos=-0.0155): inheritance(0.426), dynasties(0.421), dynasty(0.420)
-    k=2 (cos=0.4046): artificiality(0.526), theatricality(0.524), playfulness(0.523)
-    k=3 (cos=0.3152): love(0.582), passion(0.549), movie(0.544)
-    k=4 (cos=0.2878): mangxamba(0.605), zety(0.581), tom.fowler@chron.com(0.567)
-    k=5 (cos=0.0149): because(0.698), the(0.636), .(0.636)
-    k=6 (cos=0.1708): taste(0.600), flavor(0.530), juice(0.527)
-    k=7 (cos=0.1377): inequity(0.462), religiosity(0.456), vegetarianism(0.454)
-    k=8 (cos=0.2253): kind(0.700), what(0.674), really(0.669)
-    k=9 (cos=0.2279): quality(0.641), products(0.583), consumption(0.545)
-    k=10 (cos=0.2724): regard(0.609), kind(0.606), fact(0.598)
-    k=11 (cos=0.2837): watery(0.465), toxicity(0.465), primordial(0.448)
+    k=0 (cos=0.5773): playfulness(0.618), expressiveness(0.612), smoothness(0.609)
+    k=1 (cos=0.2200): therefore(0.700), particular(0.686), rather(0.665)
+    k=2 (cos=0.3274): mangxamba(0.749), ___________________________________________________________(0.711), tom.fowler@chron.com(0.708)
+    k=3 (cos=0.5885): playfulness(0.668), fearlessness(0.645), cleverness(0.639)
+    k=4 (cos=0.5515): playfulness(0.672), expressiveness(0.631), fluidity(0.614)
+    k=5 (cos=0.2278): amount(0.615), quality(0.584), value(0.577)
+    k=6 (cos=0.3174): organism(0.485), variation(0.471), characteristics(0.470)
+    k=7 (cos=0.3128): rw97(0.771), mangxamba(0.764), rungfapaisarn(0.744)
 
 --- Case 9: double --[hypernym]--> ? ---
   True tail: stand-in
-  Best matching K: k=4
+  Best matching K: k=7
   Cos similarity to true tail per output:
-    k=0: cos=0.0397
-    k=1: cos=-0.1579
-    k=2: cos=0.0391
-    k=3: cos=-0.0500
-    k=4: cos=0.1874 <<<
-    k=5: cos=-0.1486
-    k=6: cos=-0.0982
-    k=7: cos=0.0751
-    k=8: cos=-0.1507
-    k=9: cos=-0.1306
-    k=10: cos=-0.1572
-    k=11: cos=-0.0368
+    k=0: cos=-0.1456
+    k=1: cos=-0.2498
+    k=2: cos=-0.0503
+    k=3: cos=-0.1963
+    k=4: cos=-0.1688
+    k=5: cos=-0.0581
+    k=6: cos=-0.1192
+    k=7: cos=0.1986 <<<
   Nearest words for each candidate:
-    k=0 (cos=0.0397): well-being(0.520), wellbeing(0.476), enjoyment(0.454)
-    k=1 (cos=-0.1579): should(0.557), force(0.540), any(0.531)
-    k=2 (cos=0.0391): harmful(0.404), organisms(0.400), simplest(0.393)
-    k=3 (cos=-0.0500): you(0.549), can(0.543), kind(0.538)
-    k=4 (cos=0.1874): constriction(0.412), orthosis(0.410), submersion(0.402)
-    k=5 (cos=-0.1486): because(0.623), the(0.620), another(0.617)
-    k=6 (cos=-0.0982): rather(0.599), can(0.586), example(0.574)
-    k=7 (cos=0.0751): decreasing(0.485), decreases(0.471), elasticity(0.466)
-    k=8 (cos=-0.1507): just(0.682), but(0.677), even(0.673)
-    k=9 (cos=-0.1306): increase(0.681), reduce(0.631), increases(0.627)
-    k=10 (cos=-0.1572): would(0.629), should(0.629), must(0.629)
-    k=11 (cos=-0.0368): therefore(0.573), example(0.551), thus(0.548)
+    k=0 (cos=-0.1456): example(0.723), same(0.694), rather(0.675)
+    k=1 (cos=-0.2498): would(0.785), should(0.783), even(0.770)
+    k=2 (cos=-0.0503): resulting(0.627), increases(0.614), result(0.613)
+    k=3 (cos=-0.1963): change(0.924), changes(0.802), changing(0.684)
+    k=4 (cos=-0.1688): result(0.644), drop(0.637), resulting(0.635)
+    k=5 (cos=-0.0581): inside(0.557), tube(0.545), shaped(0.539)
+    k=6 (cos=-0.1192): hit(0.822), hitting(0.691), off(0.640)
+    k=7 (cos=0.1986): mangxamba(0.536), protrusion(0.522), asymmetry(0.510)
 
 --- Case 10: rash --[hypernym]--> ? ---
   True tail: series
-  Best matching K: k=8
+  Best matching K: k=1
   Cos similarity to true tail per output:
-    k=0: cos=-0.1973
-    k=1: cos=0.1992
-    k=2: cos=-0.1004
-    k=3: cos=0.1901
-    k=4: cos=-0.3223
-    k=5: cos=0.2459
-    k=6: cos=0.0766
-    k=7: cos=-0.0263
-    k=8: cos=0.2680 <<<
-    k=9: cos=0.1659
-    k=10: cos=0.1937
-    k=11: cos=0.0158
+    k=0: cos=0.1583
+    k=1: cos=0.3756 <<<
+    k=2: cos=-0.0536
+    k=3: cos=-0.1103
+    k=4: cos=0.1119
+    k=5: cos=0.0950
+    k=6: cos=0.2541
+    k=7: cos=-0.3533
   Nearest words for each candidate:
-    k=0 (cos=-0.1973): absurdity(0.475), transcendence(0.457), generality(0.454)
-    k=1 (cos=0.1992): beginning(0.518), further(0.480), resulted(0.477)
-    k=2 (cos=-0.1004): irritation(0.498), paranoia(0.481), itching(0.459)
-    k=3 (cos=0.1901): you(0.611), n't(0.599), something(0.596)
-    k=4 (cos=-0.3223): laziness(0.480), imprecision(0.470), over-use(0.468)
-    k=5 (cos=0.2459): because(0.606), caused(0.563), might(0.556)
-    k=6 (cos=0.0766): taste(0.521), skin(0.505), can(0.495)
-    k=7 (cos=-0.0263): generalized(0.490), underlying(0.445), elasticity(0.440)
-    k=8 (cos=0.2680): kind(0.718), what(0.710), actually(0.681)
-    k=9 (cos=0.1659): likely(0.685), reduce(0.642), could(0.635)
-    k=10 (cos=0.1937): because(0.614), fear(0.606), might(0.583)
-    k=11 (cos=0.0158): infection(0.580), chronic(0.560), symptom(0.558)
-Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:   1%|1         | 1/72 [00:00<00:07,  9.75it/s]Evaluate:   6%|5         | 4/72 [00:00<00:04, 14.37it/s]Evaluate:  10%|9         | 7/72 [00:00<00:03, 19.51it/s]Evaluate:  15%|#5        | 11/72 [00:00<00:02, 25.27it/s]Evaluate:  24%|##3       | 17/72 [00:00<00:01, 33.43it/s]Evaluate:  29%|##9       | 21/72 [00:00<00:02, 24.35it/s]Evaluate:  38%|###7      | 27/72 [00:01<00:01, 31.35it/s]Evaluate:  43%|####3     | 31/72 [00:01<00:01, 32.46it/s]Evaluate:  49%|####8     | 35/72 [00:01<00:01, 30.05it/s]Evaluate:  56%|#####5    | 40/72 [00:01<00:01, 31.57it/s]Evaluate:  61%|######1   | 44/72 [00:01<00:01, 25.57it/s]Evaluate:  65%|######5   | 47/72 [00:01<00:01, 21.10it/s]Evaluate:  69%|######9   | 50/72 [00:01<00:00, 22.06it/s]Evaluate:  78%|#######7  | 56/72 [00:02<00:00, 26.83it/s]Evaluate:  82%|########1 | 59/72 [00:02<00:00, 23.36it/s]Evaluate:  92%|#########1| 66/72 [00:02<00:00, 31.64it/s]Evaluate:  99%|#########8| 71/72 [00:02<00:00, 35.53it/s]Evaluate: 100%|##########| 72/72 [00:02<00:00, 28.14it/s]
+    k=0 (cos=0.1583): caused(0.678), causing(0.658), cause(0.584)
+    k=1 (cos=0.3756): that(0.741), would(0.719), this(0.719)
+    k=2 (cos=-0.0536): decreases(0.563), vibration(0.550), variability(0.546)
+    k=3 (cos=-0.1103): causes(0.550), occurs(0.538), accumulation(0.531)
+    k=4 (cos=0.1119): flooding(0.629), caused(0.607), floods(0.602)
+    k=5 (cos=0.0950): fingers(0.568), your(0.547), you(0.544)
+    k=6 (cos=0.2541): hit(0.639), blow(0.587), hitting(0.584)
+    k=7 (cos=-0.3533): mangxamba(0.665), rw97(0.622), zety(0.620)
+Evaluate:   0%|          | 0/72 [00:00<?, ?it/s]Evaluate:  14%|#3        | 10/72 [00:00<00:00, 97.08it/s]Evaluate:  39%|###8      | 28/72 [00:00<00:00, 142.85it/s]Evaluate:  65%|######5   | 47/72 [00:00<00:00, 159.93it/s]Evaluate:  92%|#########1| 66/72 [00:00<00:00, 168.21it/s]Evaluate: 100%|##########| 72/72 [00:00<00:00, 159.61it/s]
 
 ================================================================================
 Failure Case Analysis (Lowest DCI)
 ================================================================================
-  1. pennyworth --[hypernym]--> worth (DCI=0.7439)
-  2. cleave --[hypernym]--> make (DCI=0.7456)
-  3. fluorescein --[hypernym]--> dye (DCI=0.7465)
-  4. air --[hypernym]--> gas (DCI=0.7468)
-  5. tickle --[hypernym]--> itch (DCI=0.747)
-  6. treason --[hypernym]--> disloyalty (DCI=0.7473)
-  7. input --[hypernym]--> insert (DCI=0.7475)
-  8. brant --[hypernym]--> goose (DCI=0.7476)
-  9. reset --[hypernym]--> specify (DCI=0.7477)
-  10. hostess --[hypernym]--> host (DCI=0.7477)
+  1. bullring --[hypernym]--> stadium (DCI=0.6476)
+  2. lap --[hypernym]--> thigh (DCI=0.6489)
+  3. telomerase --[hypernym]--> enzyme (DCI=0.6513)
+  4. firmness --[hypernym]--> hardness (DCI=0.6518)
+  5. lurch --[hypernym]--> motion (DCI=0.6519)
+  6. fiber --[hypernym]--> cell (DCI=0.6524)
+  7. intussusception --[hypernym]--> growth (DCI=0.6526)
+  8. delicacy --[hypernym]--> smallness (DCI=0.6526)
+  9. intolerance --[hypernym]--> impatience (DCI=0.6533)
+  10. rarity --[hypernym]--> scarcity (DCI=0.6533)
 
   Failure modes by relation type: {'hypernym': 10}

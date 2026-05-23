@@ -150,7 +150,7 @@ def random_baseline(model, eval_loader, tail_memory):
             z_flat = z_k.reshape(B2 * K2, D2)
             zeros = [
                 torch.zeros(B2 * K2, HIDDEN_DIM, device=DEVICE)
-                for _ in range(4)
+                for _ in range(3)
             ]
             return z_k, transport, zeros
 
